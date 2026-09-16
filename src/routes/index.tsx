@@ -31,6 +31,7 @@ import {
 
 import treatmentRoom from "@/assets/aura-treatment-room.jpg";
 import consultationImage from "@/assets/aura-consultation.jpg";
+import logoAsset from "@/assets/sofia-jofiel-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -66,14 +67,19 @@ const pillars = [
   { number: "03", title: "Tailored Client Care", text: "Every treatment begins with listening. Your plan is designed around you, never a passing trend.", icon: Leaf },
 ];
 
+const clinicLocations = [
+  { name: "Lekki Office", address: "Ezra’s Mall, Adebayor Doherty Off Admiralty Way, Lekki Phase 1, Lagos State." },
+  { name: "Ajah Office", address: "Suite 4 & 5, Ojaja Mall, Ogombo Road, Abraham Adesanya, Ajah, Lagos State." },
+];
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "AURA Medical Aesthetics & Spa" },
-      { name: "description", content: "Bespoke medical aesthetics, skin treatments, and wellness care delivered with clinical excellence at AURA." },
-      { property: "og:title", content: "AURA Medical Aesthetics & Spa" },
-      { property: "og:description", content: "Elevate your natural beauty with considered, clinician-led aesthetic care." },
+      { title: "Sofia Jofiel Medical Aesthetics & Spa" },
+      { name: "description", content: "Bespoke medical aesthetics, skin treatments, and wellness care at Sofia Jofiel's Lekki and Ajah clinics in Lagos." },
+      { property: "og:title", content: "Sofia Jofiel Medical Aesthetics & Spa" },
+      { property: "og:description", content: "Elevate your natural beauty with considered, clinician-led aesthetic care in Lagos." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -84,10 +90,8 @@ export const Route = createFileRoute("/")({
 
 function BrandMark() {
   return (
-    <a href="#top" aria-label="AURA home" className="group flex items-center gap-3">
-      <span className="font-display text-[1.55rem] leading-none text-foreground">AURA</span>
-      <span className="h-8 w-px bg-gold/50" />
-      <span className="hidden max-w-24 text-[0.57rem] font-medium uppercase leading-[1.35] text-muted-foreground sm:block">Medical Aesthetics &amp; Spa</span>
+    <a href="#top" aria-label="Sofia Jofiel home" className="flex items-center">
+      <img src={logoAsset.url} alt="Sofia Jofiel" width={738} height={296} className="h-12 w-auto sm:h-14" />
     </a>
   );
 }
@@ -114,8 +118,8 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
             <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-sage text-sage-foreground"><Check className="size-6" /></div>
             <p className="mt-8 text-xs font-semibold uppercase text-gold">Request received</p>
             <DialogTitle className="mt-3 font-display text-4xl font-normal leading-tight">Your consultation journey begins here.</DialogTitle>
-            <DialogDescription className="mx-auto mt-4 max-w-md text-sm leading-7">Our concierge will contact you shortly to confirm your preferred appointment and answer any questions.</DialogDescription>
-            <Button className="mt-8 h-12 rounded-none px-8 uppercase" onClick={() => handleOpenChange(false)}>Return to AURA</Button>
+             <DialogDescription className="mx-auto mt-4 max-w-md text-sm leading-7">Our Sofia Jofiel concierge will contact you shortly to confirm your preferred appointment and answer any questions.</DialogDescription>
+             <Button className="mt-8 h-12 rounded-none px-8 uppercase" onClick={() => handleOpenChange(false)}>Return to Sofia Jofiel</Button>
           </div>
         ) : (
           <div className="grid md:grid-cols-[0.72fr_1.28fr]">
@@ -147,6 +151,13 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                   <Select value={treatment} onValueChange={setTreatment} required>
                     <SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Choose a treatment" /></SelectTrigger>
                     <SelectContent>{treatments.map((item) => <SelectItem key={item.name} value={item.name}>{item.name}</SelectItem>)}</SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Preferred clinic</Label>
+                  <Select required>
+                    <SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Choose a location" /></SelectTrigger>
+                    <SelectContent>{clinicLocations.map((location) => <SelectItem key={location.name} value={location.name}>{location.name}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -200,8 +211,9 @@ function Index() {
           <div className="relative z-10 flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
-              <h1 className="mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</h1>
-              <p className="mt-8 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury.</p>
+               <h1 className="mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
+               <p className="mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
+               <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury.</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="h-13 rounded-none px-7 text-xs uppercase"><a href="#treatments">Explore treatments <ArrowRight /></a></Button>
                 <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-foreground/25 px-7 text-xs uppercase"><MessageCircle /> Direct support booking</Button>
@@ -212,7 +224,7 @@ function Index() {
             </div>
           </div>
           <div className="relative min-h-[48rem] overflow-hidden lg:min-h-0">
-            <img src={treatmentRoom} alt="Serene AURA medical spa treatment room" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
+             <img src={treatmentRoom} alt="Serene Sofia Jofiel medical spa treatment room" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-foreground/45 to-transparent p-7 text-primary-foreground sm:p-10">
               <p className="max-w-xs font-display text-2xl">Quiet luxury.<br />Confident care.</p><p className="text-right text-[0.65rem] uppercase leading-5">Private rooms<br />Thoughtful details</p>
             </div>
@@ -241,7 +253,7 @@ function Index() {
 
       <section id="about" className="scroll-mt-20 bg-sage py-24 lg:py-0">
         <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
-          <div className="relative min-h-[34rem] lg:min-h-[52rem]"><img src={consultationImage} alt="AURA clinician offering a personalised aesthetic consultation" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The AURA standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
+           <div className="relative min-h-[34rem] lg:min-h-[52rem]"><img src={consultationImage} alt="Sofia Jofiel clinician offering a personalised aesthetic consultation" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
           <div id="philosophy" className="scroll-mt-20 px-5 py-20 sm:px-12 lg:flex lg:flex-col lg:justify-center lg:px-20">
             <p className="section-label">Our philosophy</p><h2 className="mt-5 max-w-xl font-display text-5xl leading-[1.04] sm:text-6xl">The science of beauty, guided by <em className="font-normal text-gold">care.</em></h2><p className="mt-7 max-w-xl text-base leading-8 text-sage-foreground/75">We believe aesthetic medicine is at its best when expertise, restraint, and genuine human connection come together.</p>
             <div className="mt-12 divide-y divide-sage-foreground/15 border-y border-sage-foreground/15">
@@ -256,12 +268,12 @@ function Index() {
       <footer id="contact" className="scroll-mt-20 bg-foreground px-5 py-16 text-primary-foreground sm:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.7fr]">
-            <div><div className="flex items-center gap-3"><span className="font-display text-3xl">AURA</span><span className="h-9 w-px bg-gold" /><span className="text-[0.58rem] uppercase leading-4 text-primary-foreground/60">Medical Aesthetics<br />&amp; Spa</span></div><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Instagram /></Button><Button variant="outline" size="icon" aria-label="Facebook" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Facebook /></Button></div></div>
-            <div><h3 className="footer-title">Visit us</h3><div className="mt-5 space-y-5 text-sm leading-6 text-primary-foreground/60"><p className="flex gap-3"><MapPin className="mt-1 size-4 shrink-0 text-gold" /> Downtown Clinic<br />125 Aura Avenue</p><p className="flex gap-3"><MapPin className="mt-1 size-4 shrink-0 text-gold" /> Westside Studio<br />48 Willow Lane</p></div></div>
+             <div><img src={logoAsset.url} alt="Sofia Jofiel Medical Aesthetics and Spa" width={738} height={296} loading="lazy" className="h-auto w-64 max-w-full" /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Instagram /></Button><Button variant="outline" size="icon" aria-label="Facebook" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Facebook /></Button></div></div>
+             <div><h3 className="footer-title">Visit us</h3><div className="mt-5 space-y-5 text-sm leading-6 text-primary-foreground/60">{clinicLocations.map((location) => <p key={location.name} className="flex gap-3"><MapPin className="mt-1 size-4 shrink-0 text-gold" /><span><strong className="font-semibold text-primary-foreground">{location.name}</strong><br />{location.address}</span></p>)}</div></div>
             <div><h3 className="footer-title">Opening hours</h3><div className="mt-5 space-y-2 text-sm text-primary-foreground/60"><p className="flex justify-between gap-5"><span>Mon–Fri</span><span>9–7</span></p><p className="flex justify-between gap-5"><span>Saturday</span><span>9–5</span></p><p className="flex justify-between gap-5"><span>Sunday</span><span>Closed</span></p></div></div>
-            <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 text-sm text-primary-foreground/60"><a href="tel:+15550128722" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4" /> (555) 012-8722</a><a href="mailto:hello@auramedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4" /> Email concierge</a></div></div>
+             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-primary-foreground/60"><a href="tel:+2349111871262" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> +234 (911) 187 1262</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
           </div>
-          <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-primary-foreground/40 sm:flex-row sm:justify-between"><p>© 2026 AURA Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
+           <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-primary-foreground/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
         </div>
       </footer>
 
@@ -269,9 +281,9 @@ function Index() {
 
       <BookingDialog key={selectedTreatment || "general"} open={bookingOpen} onOpenChange={setBookingOpen} defaultTreatment={selectedTreatment} />
       <Dialog open={conciergeOpen} onOpenChange={setConciergeOpen}>
-        <DialogContent className="border-gold/25 p-8 shadow-luxury sm:max-w-md sm:rounded-none">
-          <DialogHeader><div className="flex size-11 items-center justify-center rounded-full bg-sage text-sage-foreground"><MessageCircle className="size-5" /></div><DialogTitle className="pt-4 font-display text-3xl font-normal">How may we help?</DialogTitle><DialogDescription>Choose the easiest way to connect with your AURA concierge.</DialogDescription></DialogHeader>
-          <div className="mt-3 space-y-3"><Button onClick={() => openBooking()} className="h-14 w-full justify-between rounded-none px-5">Request a consultation <CalendarDays /></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.me/15550128722" target="_blank" rel="noreferrer">Message on WhatsApp <Send /></a></Button><p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday–Saturday, 9am–6pm</p></div>
+         <DialogContent className="max-h-[92vh] overflow-y-auto border-gold/25 p-8 shadow-luxury sm:max-w-lg sm:rounded-none">
+           <DialogHeader><div className="flex size-11 items-center justify-center rounded-full bg-sage text-sage-foreground"><MessageCircle className="size-5" /></div><DialogTitle className="pt-4 font-display text-3xl font-normal">How may we help?</DialogTitle><DialogDescription>Choose the easiest way to connect with your Sofia Jofiel concierge.</DialogDescription></DialogHeader>
+           <div className="mt-3 space-y-3"><Button onClick={() => openBooking()} className="h-14 w-full justify-between rounded-none px-5">Request a consultation <CalendarDays /></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.me/2349111871262" target="_blank" rel="noreferrer">WhatsApp +234 (911) 187 1262 <Send /></a></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="tel:+2349111871262">Call our concierge <Phone /></a></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:booking@sofiajofielmedspa.com">Email bookings <Mail /></a></Button><div className="mt-5 border-t border-border pt-5"><p className="section-label">Choose your clinic</p><div className="mt-3 space-y-3">{clinicLocations.map((location) => <div key={location.name} className="flex gap-3 text-sm leading-6"><MapPin className="mt-1 size-4 shrink-0 text-gold" /><p><strong className="font-semibold text-foreground">{location.name}</strong><br /><span className="text-muted-foreground">{location.address}</span></p></div>)}</div></div><p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday–Saturday, 9am–6pm</p></div>
         </DialogContent>
       </Dialog>
     </main>
