@@ -101,6 +101,10 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
     );
   }
 
+  const style = footer
+    ? { width: "calc(16rem * 0.92)", height: "auto" }
+    : { width: "auto", height: "calc(3.5rem * 1.08)" };
+
   return (
     <img
       src={logoAsset}
@@ -108,7 +112,8 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
       width={738}
       height={296}
       onError={() => setHasError(true)}
-      className={className || "h-12 w-auto sm:h-14"}
+      className={className || "w-auto"}
+      style={{ ...style, ...((className ? {} : {})) }}
     />
   );
 }
@@ -116,7 +121,7 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
 function BrandMark() {
   return (
     <a href="#top" aria-label="Sofia Jofiel home" className="flex items-center">
-      <BrandLogo className="h-12 w-auto sm:h-14" />
+      <BrandLogo className="h-auto w-auto" />
     </a>
   );
 }
@@ -293,7 +298,7 @@ function Index() {
       <footer id="contact" className="scroll-mt-20 bg-foreground px-5 py-16 text-primary-foreground sm:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.7fr]">
-             <div><BrandLogo className="h-auto w-64 max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Instagram /></Button><Button variant="outline" size="icon" aria-label="Facebook" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Facebook /></Button></div></div>
+             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Instagram /></Button><Button variant="outline" size="icon" aria-label="Facebook" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Facebook /></Button></div></div>
              <div><h3 className="footer-title">Visit us</h3><div className="mt-5 space-y-5 text-sm leading-6 text-primary-foreground/60">{clinicLocations.map((location) => <p key={location.name} className="flex gap-3"><MapPin className="mt-1 size-4 shrink-0 text-gold" /><span><strong className="font-semibold text-primary-foreground">{location.name}</strong><br />{location.address}</span></p>)}</div></div>
             <div><h3 className="footer-title">Opening hours</h3><div className="mt-5 space-y-2 text-sm text-primary-foreground/60"><p className="flex justify-between gap-5"><span>Mon–Fri</span><span>9–7</span></p><p className="flex justify-between gap-5"><span>Saturday</span><span>9–5</span></p><p className="flex justify-between gap-5"><span>Sunday</span><span>Closed</span></p></div></div>
              <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-primary-foreground/60"><a href="tel:+2349111871262" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> +234 (911) 187 1262</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
