@@ -103,7 +103,7 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
 
   return (
     <img
-      src={logoAsset.url}
+      src={logoAsset}
       alt="Sofia Jofiel"
       width={738}
       height={296}
