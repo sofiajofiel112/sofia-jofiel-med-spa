@@ -128,6 +128,7 @@ function BrandMark() {
 function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: boolean; onOpenChange: (open: boolean) => void; defaultTreatment?: string }) {
   const [step, setStep] = useState<"form" | "success">("form");
   const [treatment, setTreatment] = useState(defaultTreatment);
+  const [preferredTime, setPreferredTime] = useState("");
 
   function handleOpenChange(next: boolean) {
     onOpenChange(next);
@@ -136,6 +137,19 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget as HTMLFormElement;
+    const name = (form.querySelector('#name') as HTMLInputElement)?.value || "";
+    const phone = (form.querySelector('#phone') as HTMLInputElement)?.value || "";
+    const email = (form.querySelector('#email') as HTMLInputElement)?.value || "";
+    const date = (form.querySelector('#date') as HTMLInputElement)?.value || "";
+    const time = preferredTime || "";
+
+    const message = `New consultation request:%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0ATreatment: ${treatment}%0APreferred date: ${date}%0APreferred time: ${time}`;
+    const waNumber = '2349111871264';
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp with prefilled message, then show success state
+    window.open(waUrl, '_blank');
     setStep("success");
   }
 
@@ -172,7 +186,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
               <div className="mt-7 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2"><Label htmlFor="name">Full name</Label><Input id="name" required placeholder="Your name" className="h-11 rounded-none" /></div>
-                  <div className="space-y-2"><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" required placeholder="(555) 000-0000" className="h-11 rounded-none" /></div>
+                  <div className="space-y-2"><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" required placeholder="(234) 000-0000" className="h-11 rounded-none" /></div>
                 </div>
                 <div className="space-y-2"><Label htmlFor="email">Email address</Label><Input id="email" type="email" required placeholder="you@example.com" className="h-11 rounded-none" /></div>
                 <div className="space-y-2">
@@ -182,18 +196,15 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                     <SelectContent>{treatments.map((item) => <SelectItem key={item.name} value={item.name}>{item.name}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label>Preferred clinic</Label>
-                  <Select required>
-                    <SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Choose a location" /></SelectTrigger>
-                    <SelectContent>{clinicLocations.map((location) => <SelectItem key={location.name} value={location.name}>{location.name}</SelectItem>)}</SelectContent>
-                  </Select>
-                </div>
+                {/* Preferred clinic removed — single office */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2"><Label htmlFor="date">Preferred date</Label><Input id="date" type="date" required className="h-11 rounded-none" /></div>
                   <div className="space-y-2">
                     <Label>Preferred time</Label>
-                    <Select required><SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Select time" /></SelectTrigger><SelectContent><SelectItem value="morning">Morning</SelectItem><SelectItem value="afternoon">Afternoon</SelectItem><SelectItem value="evening">Evening</SelectItem></SelectContent></Select>
+                    <Select value={preferredTime} onValueChange={setPreferredTime} required>
+                      <SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Select time" /></SelectTrigger>
+                      <SelectContent><SelectItem value="morning">Morning</SelectItem><SelectItem value="afternoon">Afternoon</SelectItem><SelectItem value="evening">Evening</SelectItem></SelectContent>
+                    </Select>
                   </div>
                 </div>
                 <Button type="submit" className="h-12 w-full rounded-none uppercase">Request appointment <ArrowRight /></Button>
@@ -312,7 +323,13 @@ function Index() {
       <Dialog open={conciergeOpen} onOpenChange={setConciergeOpen}>
          <DialogContent className="max-h-[92vh] overflow-y-auto border-gold/25 p-8 shadow-luxury sm:max-w-lg sm:rounded-none">
            <DialogHeader><div className="flex size-11 items-center justify-center rounded-full bg-sage text-sage-foreground"><MessageCircle className="size-5" /></div><DialogTitle className="pt-4 font-display text-3xl font-normal">How may we help?</DialogTitle><DialogDescription>Choose the easiest way to connect with your Sofia Jofiel concierge.</DialogDescription></DialogHeader>
-          <div className="mt-3 space-y-3"><Button onClick={() => openBooking()} className="h-14 w-full justify-between rounded-none px-5">Request a consultation <CalendarDays /></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.link/axqkwx" target="_blank" rel="noreferrer">WhatsApp 09111871264 <Send /></a></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="tel:+2349111871264">Call our concierge <Phone /></a></Button><Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:booking@sofiajofielmedspa.com">Email bookings <Mail /></a></Button><div className="mt-5 border-t border-border pt-5"><p className="section-label">Choose your clinic</p><div className="mt-3 space-y-3">{clinicLocations.map((location) => <div key={location.name} className="flex gap-3 text-sm leading-6"><MapPin className="mt-1 size-4 shrink-0 text-gold" /><p><strong className="font-semibold text-foreground">{location.name}</strong><br /><span className="text-muted-foreground">{location.address}</span></p></div>)}</div></div><p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday–Saturday, 9am–6pm</p></div>
+          <div className="mt-3 space-y-3">
+            <Button onClick={() => openBooking()} className="h-14 w-full justify-between rounded-none px-5">Request a consultation <CalendarDays /></Button>
+            <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.link/axqkwx" target="_blank" rel="noreferrer">Send us a WhatsApp Message <Send /></a></Button>
+            <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="tel:+2349111871264">Call our concierge <Phone /></a></Button>
+            <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:booking@sofiajofielmedspa.com">Email bookings <Mail /></a></Button>
+            <p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday–Saturday, 9am–6pm</p>
+          </div>
         </DialogContent>
       </Dialog>
     </main>
