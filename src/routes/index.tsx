@@ -25,13 +25,10 @@ import {
   Syringe,
   Target,
   Waves,
-  Music,
   X,
   Zap,
 } from "lucide-react";
 
-import treatmentRoom from "@/assets/aura-treatment-room.jpg";
-import consultationImage from "@/assets/aura-consultation.jpg";
 import logoAsset from "@/assets/sofia-jofiel-logo.png";
 import { Button } from "@/components/ui/button";
 import {
@@ -102,8 +99,8 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
   }
 
   const style = footer
-    ? { width: "calc(16rem * 0.9)", height: "auto" }
-    : { width: "auto", height: "calc(3.5rem * 1.188)" };
+    ? { width: "calc(16rem * 0.9 * 0.9)", height: "auto" }
+    : { width: "auto", height: "calc(3.5rem * 1.188 * 1.1)" };
 
   return (
     <img
@@ -115,6 +112,15 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
       className={className || "w-auto"}
       style={{ ...style, ...((className ? {} : {})) }}
     />
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-4 fill-current">
+      <path d="M14.65 3.5c.43 1.53 1.55 2.77 3.2 3.17v2.52a5.86 5.86 0 0 1-3.2-1.04v7.92a5.14 5.14 0 1 1-5.14-5.14c.25 0 .5.02.74.07v2.68c-.22-.04-.45-.06-.69-.06A2.41 2.41 0 1 0 11.8 18.6V3.5h2.85Z" />
+      <path d="M14.65 3.5c.43 1.53 1.55 2.77 3.2 3.17v2.52a5.86 5.86 0 0 1-3.2-1.04v7.92a5.14 5.14 0 1 1-5.14-5.14c.25 0 .5.02.74.07v2.68c-.22-.04-.45-.06-.69-.06A2.41 2.41 0 1 0 11.8 18.6V3.5h2.85Z" fill="currentColor" opacity="0.2" />
+    </svg>
   );
 }
 
@@ -197,7 +203,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                     <SelectContent>{treatments.map((item) => <SelectItem key={item.name} value={item.name}>{item.name}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                {/* Preferred clinic removed — single office */}
+                {/* Preferred clinic removed; single office */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2"><Label htmlFor="date">Preferred date</Label><Input id="date" type="date" required className="h-11 rounded-none" /></div>
                   <div className="space-y-2">
@@ -251,10 +257,10 @@ function Index() {
         <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[90rem] lg:grid-cols-[1.08fr_0.92fr]">
           <div className="relative z-10 flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
             <div className="max-w-3xl">
-              <div className="flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
-               <h1 className="mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
-               <p className="mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
-               <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury.</p>
+              <div className="motion-reveal flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
+               <h1 className="motion-reveal mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
+               <p className="motion-reveal mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
+               <p className="motion-reveal mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury.</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="h-13 rounded-none px-7 text-xs uppercase"><a href="#treatments">Explore treatments <ArrowRight /></a></Button>
                 <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-foreground/25 px-7 text-xs uppercase"><MessageCircle /> Direct support booking</Button>
@@ -264,8 +270,8 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative min-h-[48rem] overflow-hidden lg:min-h-0">
-             <img src={treatmentRoom} alt="Serene Sofia Jofiel medical spa treatment room" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
+          <div className="hero-visual relative min-h-[48rem] overflow-hidden lg:min-h-0">
+             <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80" alt="African woman in a serene luxury spa treatment room" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-foreground/45 to-transparent p-7 text-primary-foreground sm:p-10">
               <p className="max-w-xs font-display text-2xl">Quiet luxury.<br />Confident care.</p><p className="text-right text-[0.65rem] uppercase leading-5">Private rooms<br />Thoughtful details</p>
             </div>
@@ -277,7 +283,7 @@ function Index() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div><p className="section-label">Our expertise</p><h2 className="mt-4 font-display text-5xl sm:text-6xl">Treatments, <em className="font-normal text-gold">refined.</em></h2></div>
-            <p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">Every service begins with a considered consultation and a clear, personalised plan—because the most beautiful results should always feel like you.</p>
+            <p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">Every service begins with a considered consultation and a clear, personalised plan; because the most beautiful results should always feel like you.</p>
           </div>
           <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4">
             {treatments.map((item, index) => {
@@ -294,7 +300,7 @@ function Index() {
 
       <section id="about" className="scroll-mt-20 bg-sage py-24 lg:py-0">
         <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
-           <div className="relative min-h-[34rem] lg:min-h-[52rem]"><img src={consultationImage} alt="Sofia Jofiel clinician offering a personalised aesthetic consultation" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
+           <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80" alt="Nigerian aesthetics consultant speaking with a client in a boutique clinic" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
           <div id="philosophy" className="scroll-mt-20 px-5 py-20 sm:px-12 lg:flex lg:flex-col lg:justify-center lg:px-20">
             <p className="section-label">Our philosophy</p><h2 className="mt-5 max-w-xl font-display text-5xl leading-[1.04] sm:text-6xl">The science of beauty, guided by <em className="font-normal text-gold">care.</em></h2><p className="mt-7 max-w-xl text-base leading-8 text-sage-foreground/75">We believe aesthetic medicine is at its best when expertise, restraint, and genuine human connection come together.</p>
             <div className="mt-12 divide-y divide-sage-foreground/15 border-y border-sage-foreground/15">
@@ -309,7 +315,7 @@ function Index() {
       <footer id="contact" className="scroll-mt-20 bg-foreground px-5 py-16 text-primary-foreground sm:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.7fr]">
-             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><Music className="size-4" /></a></Button></div></div>
+             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><TikTokIcon /></a></Button></div></div>
             <div>
               <h3 className="footer-title">Visit us</h3>
               <div className="mt-2 text-sm leading-6 text-primary-foreground/60">
@@ -319,10 +325,10 @@ function Index() {
             <div>
               <h3 className="footer-title">Opening hours</h3>
               <div className="mt-5 text-sm text-primary-foreground/60">
-                <div className="grid grid-cols-[auto_auto] gap-x-6 gap-y-2 items-start">
-                  <div>Mon–Fri</div><div className="justify-self-end">9–7</div>
-                  <div>Saturday</div><div className="justify-self-end">9–5</div>
-                  <div>Sunday</div><div className="justify-self-end">Closed</div>
+                <div className="grid grid-cols-[auto_auto] items-start gap-x-3 gap-y-2">
+                  <div>Mon; Fri</div><div>9; 7</div>
+                  <div>Saturday</div><div>9; 5</div>
+                  <div>Sunday</div><div>Closed</div>
                 </div>
               </div>
             </div>
@@ -343,7 +349,7 @@ function Index() {
             <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.link/axqkwx" target="_blank" rel="noreferrer">Send us a WhatsApp Message <Send /></a></Button>
             <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="tel:+2349111871264">Call our concierge <Phone /></a></Button>
             <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:booking@sofiajofielmedspa.com">Email bookings <Mail /></a></Button>
-            <p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday–Saturday, 9am–6pm</p>
+            <p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday; Saturday, 9am; 6pm</p>
           </div>
         </DialogContent>
       </Dialog>
