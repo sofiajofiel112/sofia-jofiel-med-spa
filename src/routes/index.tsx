@@ -280,7 +280,7 @@ function Index() {
             </div>
           </div>
           <div className="hero-visual relative min-h-[48rem] overflow-hidden lg:min-h-0">
-             <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Nigerian woman in a serene luxury spa treatment room" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
+             <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80" alt="Nigerian client receiving a modern skin treatment in a professional medical spa" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-foreground/45 to-transparent p-7 text-primary-foreground sm:p-10">
               <p className="max-w-xs font-display text-2xl">Quiet luxury.<br />Confident care.</p><p className="text-right text-[0.65rem] uppercase leading-5">Private rooms<br />Thoughtful details</p>
             </div>
@@ -297,7 +297,7 @@ function Index() {
           <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4">
             {treatments.map((item, index) => {
               const Icon = item.icon;
-              return <article key={item.name} className="treatment-card group relative border-b border-border px-5 py-9 sm:border-r sm:px-7 lg:min-h-[22rem] lg:px-8 lg:py-10">
+              return <article key={item.name} className="treatment-card group relative border-b border-border px-5 py-9 sm:border-r sm:px-7 lg:min-h-[22rem] lg:px-8 lg:py-10" style={{ animationDelay: `${index * 80}ms` }}>
                 <div className="flex items-start justify-between"><span className="flex size-11 items-center justify-center border border-gold/40 text-gold"><Icon className="size-5" strokeWidth={1.5} /></span><span className="text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</span></div>
                 <h3 className="mt-10 font-display text-2xl leading-tight">{item.name}</h3><p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
                 <Button variant="link" onClick={() => openBooking(item.name)} className="mt-7 h-auto p-0 text-xs uppercase text-foreground no-underline">Inquire / Book <ChevronRight className="transition-transform group-hover:translate-x-1" /></Button>
@@ -309,7 +309,7 @@ function Index() {
 
       <section id="about" className="scroll-mt-20 bg-sage py-24 lg:py-0">
         <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
-           <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80" alt="African beauty consultant speaking with a client in a boutique clinic" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
+           <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=80" alt="Nigerian patient in a clinical skincare consultation at a modern medical spa" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
           <div id="philosophy" className="scroll-mt-20 px-5 py-20 sm:px-12 lg:flex lg:flex-col lg:justify-center lg:px-20">
             <p className="section-label">Our philosophy</p><h2 className="mt-5 max-w-xl font-display text-5xl leading-[1.04] sm:text-6xl">The science of beauty, guided by <em className="font-normal text-gold">care.</em></h2><p className="mt-7 max-w-xl text-base leading-8 text-sage-foreground/75">We believe aesthetic medicine is at its best when expertise, restraint, and genuine human connection come together.</p>
             <div className="mt-12 divide-y divide-sage-foreground/15 border-y border-sage-foreground/15">
