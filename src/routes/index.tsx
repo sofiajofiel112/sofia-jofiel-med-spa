@@ -160,7 +160,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
       `Treatment: ${treatment}`,
       `Preferred date: ${date}`,
       `Preferred time: ${time}`,
-    ].join('%0A');
+    ].join('\n');
     const waNumber = '2349111871264';
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
