@@ -162,9 +162,9 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
       `Preferred time: ${time}`,
     ].join('\n');
     const waNumber = '2349111871264';
-    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(message)}`;
 
-    // Open WhatsApp with prefilled message, then show success state
+    // Open WhatsApp directly to the contact chat with the message prefilled
     window.open(waUrl, '_blank');
     setStep("success");
   }
