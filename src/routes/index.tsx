@@ -21,7 +21,6 @@ import {
   Phone,
   Send,
   ShieldCheck,
-  Sparkles,
   Syringe,
   Target,
   Waves,
@@ -52,7 +51,7 @@ const treatments = [
   { name: "Skin Consultation", description: "A comprehensive skin analysis and bespoke treatment roadmap.", icon: CircleUserRound },
   { name: "Botox Treatments", description: "Subtle, precision-led treatments for a refreshed, natural expression.", icon: Syringe },
   { name: "Dermal Fillers", description: "Artful facial balancing to restore structure, volume, and harmony.", icon: Droplets },
-  { name: "Medical-Grade Facials", description: "Results-driven rituals tailored to your skin's changing needs.", icon: Sparkles },
+  { name: "Medical-Grade Facials", description: "Results-driven rituals tailored to your skin's changing needs.", icon: Droplets },
   { name: "Laser Treatment", description: "Advanced light technology for clarity, tone, and lasting smoothness.", icon: Zap },
   { name: "Body Sculpting & Treatment", description: "Non-invasive contouring designed around your individual goals.", icon: Waves },
   { name: "IV Infusion Therapy", description: "Clinician-led hydration and nutrient support for renewed vitality.", icon: Activity },
@@ -275,7 +274,7 @@ function Index() {
                 <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-foreground/25 px-7 text-xs uppercase"><MessageCircle /> Direct support booking</Button>
               </div>
               <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-[0.68rem] font-semibold uppercase text-muted-foreground">
-                <span className="flex items-center gap-2"><BadgeCheck className="size-4 text-gold" /> Clinician led</span><span className="flex items-center gap-2"><Sparkles className="size-4 text-gold" /> Natural results</span><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-gold" /> Private care</span>
+                <span className="flex items-center gap-2"><BadgeCheck className="size-4 text-gold" /> Clinician led</span><span className="flex items-center gap-2"><Leaf className="size-4 text-gold" /> Natural results</span><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-gold" /> Private care</span>
               </div>
             </div>
           </div>
