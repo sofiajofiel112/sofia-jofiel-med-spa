@@ -288,6 +288,42 @@ function Index() {
         </div>
       </section>
 
+      <section className="border-b border-border bg-card/40 px-5 py-20 sm:px-10 lg:py-24">
+        <div className="mx-auto max-w-[90rem]">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className=" rounded-none border border-gold/20 bg-background/40 p-8 sm:p-10">
+              <p className="section-label">Signature care</p>
+              <h2 className="mt-5 max-w-xl font-display text-4xl leading-[1.02] sm:text-6xl">Luxury aesthetics, grounded in clinical expertise.</h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">Every Sofia Jofiel treatment begins with listening, skin analysis, and a tailored plan that balances visible refinement with natural, confident results.</p>
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Consultation</p><p className="mt-3 font-display text-3xl">01</p><p className="mt-2 text-sm leading-6 text-muted-foreground">In-depth assessment and treatment mapping.</p></div>
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Precision</p><p className="mt-3 font-display text-3xl">02</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Clinician-led protocols and safe medical standards.</p></div>
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Aftercare</p><p className="mt-3 font-display text-3xl">03</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Thoughtful guidance for lasting, natural results.</p></div>
+              </div>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="min-h-[18rem] overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80')" }} aria-label="Client treatment room" />
+              <div className="flex flex-col justify-between border border-border bg-card/80 p-5">
+                <div>
+                  <p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Why clients choose us</p>
+                  <p className="mt-4 font-display text-3xl leading-tight">Discreet, elevated, reassuring.</p>
+                </div>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground">From Lagos to your lifestyle, each plan is individually designed to feel calm, credible, and beautifully balanced.</p>
+              </div>
+              <div className="col-span-full overflow-hidden border border-border bg-card/80 p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Private clinic experience</p>
+                    <p className="mt-3 font-display text-3xl leading-tight">Designed for comfort, confidence, and calm.</p>
+                  </div>
+                  <div className="h-24 w-full max-w-[18rem] overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80')" }} aria-label="Luxury treatment clinic interior" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="treatments" className="scroll-mt-24 px-5 py-24 sm:px-10 lg:py-36">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
