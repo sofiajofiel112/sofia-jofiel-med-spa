@@ -409,19 +409,19 @@ function Index() {
         </div>
       </section>
 
-      <footer id="contact" className="scroll-mt-20 border-t border-border bg-[#111111] px-5 py-16 text-primary-foreground sm:px-10">
+      <footer id="contact" className="scroll-mt-20 border-t border-border bg-[#111111] px-5 py-16 text-white sm:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.7fr]">
-             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/70">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><TikTokIcon /></a></Button></div></div>
+             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-white/70">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><TikTokIcon /></a></Button></div></div>
             <div>
               <h3 className="footer-title">Visit us</h3>
-              <div className="mt-2 text-sm leading-6 text-primary-foreground/70">
-                {clinicLocations.map((location) => <div key={location.name} className=""><strong className="font-semibold text-primary-foreground">{location.name}</strong><div className="mt-2">{location.address}</div></div>)}
+              <div className="mt-2 text-sm leading-6 text-white/70">
+                {clinicLocations.map((location) => <div key={location.name} className=""><strong className="font-semibold text-white">{location.name}</strong><div className="mt-2">{location.address}</div></div>)}
               </div>
             </div>
             <div>
               <h3 className="footer-title">Opening hours</h3>
-              <div className="mt-5 text-sm text-primary-foreground/70">
+              <div className="mt-5 text-sm text-white/70">
                 <div className="grid grid-cols-[auto_auto] items-start gap-x-2 gap-y-2">
                   <div>Mon — Fri</div><div>9:00 — 19:00</div>
                   <div>Saturday</div><div>9:00 — 17:00</div>
@@ -429,9 +429,9 @@ function Index() {
                 </div>
               </div>
             </div>
-             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-primary-foreground/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
+             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-white/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
           </div>
-           <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-primary-foreground/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
+           <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-white/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
         </div>
       </footer>
 
