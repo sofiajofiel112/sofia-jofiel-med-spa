@@ -343,6 +343,42 @@ function Index() {
         </div>
       </section>
 
+      <section className="border-t border-border bg-[#151515] px-5 py-24 sm:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+            <div className="space-y-6">
+              <p className="section-label">Why Sofia Jofiel</p>
+              <h2 className="font-display text-5xl leading-[1.02] sm:text-6xl">Clinical confidence, without the clinical coldness.</h2>
+              <p className="max-w-xl text-base leading-8 text-muted-foreground">Our clinic blends medical-grade expertise with a warm, considered approach that helps you feel at ease while achieving refined, natural-looking results.</p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Private care</p><p className="mt-3 font-display text-4xl">1:1</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Tailored consultations and treatment plans.</p></div>
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Medical grade</p><p className="mt-3 font-display text-4xl">A+</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Protocols chosen for safety, comfort, and visible polish.</p></div>
+                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Luxury feel</p><p className="mt-3 font-display text-4xl">Calm</p><p className="mt-2 text-sm leading-6 text-muted-foreground">An environment designed to feel restorative, not rushed.</p></div>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="hero-visual relative min-h-[20rem] overflow-hidden border border-border bg-cover bg-center sm:min-h-[24rem]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80')" }} aria-label="Sofia Jofiel aesthetic treatment" />
+              <div className="flex min-h-[20rem] flex-col justify-between border border-border bg-card/80 p-5 sm:min-h-[24rem]">
+                <div>
+                  <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Signature approach</p>
+                  <p className="mt-4 font-display text-3xl leading-tight">Natural-looking refinement with a confident finish.</p>
+                </div>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground">Whether you are refreshing your glow or correcting balance, every plan is shaped around your face, your features, and your pace.</p>
+              </div>
+              <div className="sm:col-span-2 overflow-hidden border border-border bg-card/80 p-4 sm:p-5">
+                <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+                  <div>
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Designed for modern living</p>
+                    <p className="mt-3 font-display text-3xl leading-tight">Thoughtful treatment, real-world results.</p>
+                  </div>
+                  <div className="h-28 overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80')" }} aria-label="Luxury med spa interior" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="scroll-mt-20 bg-sage py-24 lg:py-0">
         <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
            <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80" alt="Spa massage scene in a premium wellness clinic" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
@@ -355,29 +391,45 @@ function Index() {
         </div>
       </section>
 
-      <section className="px-5 py-24 text-center sm:px-10 lg:py-36"><p className="section-label">Begin your journey</p><h2 className="mx-auto mt-5 max-w-4xl font-display text-5xl leading-tight sm:text-7xl">A more confident you,<br /><em className="font-normal text-gold">beautifully considered.</em></h2><p className="mx-auto mt-6 max-w-xl leading-8 text-muted-foreground">Meet with an AURA practitioner to explore the right treatment path for your goals.</p><Button onClick={() => openBooking()} className="mt-9 h-13 rounded-none px-8 text-xs uppercase">Book your consultation <CalendarDays /></Button></section>
+      <section className="relative overflow-hidden px-5 py-24 text-center sm:px-10 lg:py-36">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,151,78,0.18),transparent_38%)]" aria-hidden="true" />
+        <div className="relative mx-auto max-w-4xl">
+          <p className="section-label">Begin your journey</p>
+          <h2 className="mx-auto mt-5 max-w-4xl font-display text-5xl leading-tight sm:text-7xl">A more confident you,<br /><em className="font-normal text-gold">beautifully considered.</em></h2>
+          <p className="mx-auto mt-6 max-w-xl leading-8 text-muted-foreground">Meet with our clinical team to explore the right treatment path for your goals, your skin, and your lifestyle.</p>
+          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button onClick={() => openBooking()} className="h-13 rounded-none px-8 text-xs uppercase">Book your consultation <CalendarDays /></Button>
+            <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-border bg-transparent px-8 text-xs uppercase">Speak with concierge</Button>
+          </div>
+          <div className="mt-12 grid gap-4 border-t border-border pt-6 text-left sm:grid-cols-3">
+            <div className="rounded-none border border-border bg-card/70 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Private planning</p><p className="mt-3 text-sm leading-6 text-muted-foreground">Bespoke recommendations based on your goals and treatment history.</p></div>
+            <div className="rounded-none border border-border bg-card/70 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Clinician-led care</p><p className="mt-3 text-sm leading-6 text-muted-foreground">Medical-grade protocols and luxury-level attention at every step.</p></div>
+            <div className="rounded-none border border-border bg-card/70 p-4"><p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Lagos-based service</p><p className="mt-3 text-sm leading-6 text-muted-foreground">Thoughtful, discreet care designed around your routine and comfort.</p></div>
+          </div>
+        </div>
+      </section>
 
-      <footer id="contact" className="scroll-mt-20 bg-foreground px-5 py-16 text-primary-foreground sm:px-10">
+      <footer id="contact" className="scroll-mt-20 border-t border-border bg-[#111111] px-5 py-16 text-primary-foreground sm:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.7fr]">
-             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/60">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><TikTokIcon /></a></Button></div></div>
+             <div><BrandLogo className="max-w-full" footer /><p className="mt-7 max-w-sm text-sm leading-7 text-primary-foreground/70">Elevated aesthetic medicine, grounded in expertise and made personal to you.</p><div className="mt-7 flex gap-2"><Button asChild variant="outline" size="icon" aria-label="Instagram" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://instagram.com/sofiajofiel.spa" target="_blank" rel="noreferrer"><Instagram /></a></Button><Button asChild variant="outline" size="icon" aria-label="TikTok" className="rounded-none border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="https://www.tiktok.com/@sofiajofiel.spa" target="_blank" rel="noreferrer"><TikTokIcon /></a></Button></div></div>
             <div>
               <h3 className="footer-title">Visit us</h3>
-              <div className="mt-2 text-sm leading-6 text-primary-foreground/60">
+              <div className="mt-2 text-sm leading-6 text-primary-foreground/70">
                 {clinicLocations.map((location) => <div key={location.name} className=""><strong className="font-semibold text-primary-foreground">{location.name}</strong><div className="mt-2">{location.address}</div></div>)}
               </div>
             </div>
             <div>
               <h3 className="footer-title">Opening hours</h3>
-              <div className="mt-5 text-sm text-primary-foreground/60">
-                <div className="grid grid-cols-[auto_auto] items-start gap-x-1 gap-y-2">
-                  <div>Mon — Fri</div><div>9 — 7</div>
-                  <div>Saturday</div><div>9 — 5</div>
+              <div className="mt-5 text-sm text-primary-foreground/70">
+                <div className="grid grid-cols-[auto_auto] items-start gap-x-2 gap-y-2">
+                  <div>Mon — Fri</div><div>9:00 — 19:00</div>
+                  <div>Saturday</div><div>9:00 — 17:00</div>
                   <div>Sunday</div><div>Closed</div>
                 </div>
               </div>
             </div>
-             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-primary-foreground/60"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
+             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-primary-foreground/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
           </div>
            <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-primary-foreground/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
         </div>
