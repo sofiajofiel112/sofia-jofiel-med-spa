@@ -65,6 +65,33 @@ const pillars = [
   { number: "03", title: "Tailored Client Care", text: "Every treatment begins with listening. Your plan is designed around you, never a passing trend.", icon: Leaf },
 ];
 
+const galleryHighlights = [
+  {
+    label: "Skin rituals",
+    title: "Calm, clinical, and deeply restorative.",
+    description: "Medical-grade facials and skin correction plans that leave you refreshed, supported, and visibly brighter.",
+    image: "https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    label: "Confidence-first aesthetics",
+    title: "Natural balance, beautifully refined.",
+    description: "Subtle treatments designed to restore harmony, soften lines, and enhance what is already beautifully yours.",
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    label: "Wellness-led care",
+    title: "A softer, more radiant everyday glow.",
+    description: "From hydration support to tailored wellness rituals, our approach keeps your skin and wellbeing in sync.",
+    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    label: "Private clinic feel",
+    title: "Luxury details that put you at ease.",
+    description: "An intimate environment, thoughtful service, and expert guidance from consultation through aftercare.",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+  },
+];
+
 const clinicLocations = [
   { name: "Our Office", address: "Suite 4 & 5, Ojaja Mall, Ogombo Road, Abraham Adesanya, Ajah, Lagos State." },
 ];
@@ -252,14 +279,14 @@ function Index() {
         <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <BrandMark />
           <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
-            {["Treatments", "About", "Philosophy", "Contact"].map((item) => <a key={item} href={`#${item.toLowerCase()}`} className="text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-gold">{item}</a>)}
+            {["Treatments", "Gallery", "About", "Philosophy", "Contact"].map((item) => <a key={item} href={`#${item.toLowerCase()}`} className="text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-gold">{item}</a>)}
           </nav>
           <div className="flex items-center gap-2">
             <Button onClick={() => openBooking()} className="hidden h-11 rounded-none px-6 text-xs uppercase sm:inline-flex">Book consultation</Button>
             <Button variant="ghost" size="icon" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">{menuOpen ? <X /> : <Menu />}</Button>
           </div>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-background px-5 py-6 lg:hidden">{["Treatments", "About", "Philosophy", "Contact"].map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">{item}</a>)}<Button onClick={() => openBooking()} className="mt-6 h-12 w-full rounded-none">Book consultation</Button></nav>}
+        {menuOpen && <nav className="border-t border-border bg-background px-5 py-6 lg:hidden">{["Treatments", "Gallery", "About", "Philosophy", "Contact"].map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">{item}</a>)}<Button onClick={() => openBooking()} className="mt-6 h-12 w-full rounded-none">Book consultation</Button></nav>}
       </header>
 
       <section className="relative min-h-[calc(100svh-5rem)] border-b border-border lg:min-h-[calc(100vh-5rem)]">
@@ -269,7 +296,7 @@ function Index() {
               <div className="motion-reveal flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
                <h1 className="motion-reveal mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
                <p className="motion-reveal mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
-               <p className="motion-reveal mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury.</p>
+               <p className="motion-reveal mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury. We create plans that feel polished, personal, and entirely aligned with your lifestyle.</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="h-13 rounded-none px-7 text-xs uppercase"><a href="#treatments">Explore treatments <ArrowRight /></a></Button>
                 <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-foreground/25 px-7 text-xs uppercase"><MessageCircle /> Direct support booking</Button>
@@ -375,6 +402,31 @@ function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" className="scroll-mt-20 border-t border-border bg-card/40 px-5 py-24 sm:px-10 lg:py-32">
+        <div className="mx-auto max-w-[90rem]">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="section-label">A closer look</p>
+              <h2 className="mt-4 max-w-3xl font-display text-5xl leading-[1.02] sm:text-6xl">An atmosphere of calm, refinement, and real results.</h2>
+            </div>
+            <p className="max-w-xl text-base leading-8 text-muted-foreground">Our clinic blends a high-touch medical experience with the ease of a luxury wellness retreat, so every appointment feels considered, private, and beautifully reassuring.</p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {galleryHighlights.map((item) => (
+              <article key={item.title} className="overflow-hidden border border-border bg-background">
+                <div className="h-72 bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')` }} aria-label={item.title} />
+                <div className="p-5">
+                  <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">{item.label}</p>
+                  <h3 className="mt-3 font-display text-2xl leading-tight">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.description}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
