@@ -31,6 +31,7 @@ import {
 
 import botoxImage from "@/assets/botox.avif";
 import consultationImage from "@/assets/aura-consultation.jpg";
+import creamImage from "@/assets/cream.jpeg";
 import fillerImage from "@/assets/filler.jpeg";
 import ivImage from "@/assets/iv.jpeg";
 import laserImage from "@/assets/laser.jpg";
@@ -399,7 +400,7 @@ function Index() {
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="hero-visual relative min-h-[20rem] overflow-hidden border border-border bg-cover bg-center sm:min-h-[24rem]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80')" }} aria-label="Sofia Jofiel aesthetic treatment" />
+              <div className="hero-visual relative min-h-[20rem] overflow-hidden border border-border bg-cover bg-center sm:min-h-[24rem]" style={{ backgroundImage: `url('${creamImage}')` }} aria-label="Sofia Jofiel aesthetic treatment" />
               <div className="flex min-h-[20rem] flex-col justify-between border border-border bg-card/80 p-5 sm:min-h-[24rem]">
                 <div>
                   <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Signature approach</p>
