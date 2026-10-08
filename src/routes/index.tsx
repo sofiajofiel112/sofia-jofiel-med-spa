@@ -29,6 +29,7 @@ import {
   Zap,
 } from "lucide-react";
 
+import consultationImage from "@/assets/aura-consultation.jpg";
 import logoAsset from "@/assets/sofia-jofiel-logo.png";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,7 +50,7 @@ import {
 } from "@/components/ui/select";
 
 const treatments = [
-  { name: "Skin Consultation", description: "Thoughtful, one-to-one evaluation of your skin goals, concerns, and treatment history to build a clear, personalised plan.", icon: CircleUserRound, image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" },
+  { name: "Skin Consultation", description: "Thoughtful, one-to-one evaluation of your skin goals, concerns, and treatment history to build a clear, personalised plan.", icon: CircleUserRound, image: consultationImage },
   { name: "Botox Treatments", description: "Precision-led wrinkle softening that smooths expression lines while preserving the natural movement and character of your face.", icon: Syringe, image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80" },
   { name: "Dermal Fillers", description: "Strategic volume restoration and contour refinement to enhance balance, lift, and definition with natural-looking results.", icon: Droplets, image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
   { name: "Medical-Grade Facials", description: "Deeply renewing rituals that target congestion, luminosity, hydration, and long-term skin health.", icon: Flower2, image: "https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80" },
