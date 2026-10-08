@@ -497,7 +497,7 @@ function Index() {
                 </div>
               </div>
             </div>
-             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-white/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> info@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
+             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-white/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> info@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a></div></div>
           </div>
            <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-white/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
         </div>
