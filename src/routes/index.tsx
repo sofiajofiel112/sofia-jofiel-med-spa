@@ -49,14 +49,14 @@ import {
 } from "@/components/ui/select";
 
 const treatments = [
-  { name: "Skin Consultation", description: "A comprehensive skin analysis and bespoke treatment roadmap.", icon: CircleUserRound },
-  { name: "Botox Treatments", description: "Subtle, precision-led treatments for a refreshed, natural expression.", icon: Syringe },
-  { name: "Dermal Fillers", description: "Artful facial balancing to restore structure, volume, and harmony.", icon: Droplets },
-  { name: "Medical-Grade Facials", description: "Results-driven rituals tailored to your skin's changing needs.", icon: Flower2 },
-  { name: "Laser Treatment", description: "Advanced light technology for clarity, tone, and lasting smoothness.", icon: Zap },
-  { name: "Body Sculpting & Treatment", description: "Non-invasive contouring designed around your individual goals.", icon: Waves },
-  { name: "IV Infusion Therapy", description: "Clinician-led hydration and nutrient support for renewed vitality.", icon: Activity },
-  { name: "Weight Management", description: "A considered, medically supported path to sustainable wellbeing.", icon: Target },
+  { name: "Skin Consultation", description: "Thoughtful, one-to-one evaluation of your skin goals, concerns, and treatment history to build a clear, personalised plan.", icon: CircleUserRound, image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" },
+  { name: "Botox Treatments", description: "Precision-led wrinkle softening that smooths expression lines while preserving the natural movement and character of your face.", icon: Syringe, image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80" },
+  { name: "Dermal Fillers", description: "Strategic volume restoration and contour refinement to enhance balance, lift, and definition with natural-looking results.", icon: Droplets, image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
+  { name: "Medical-Grade Facials", description: "Deeply renewing rituals that target congestion, luminosity, hydration, and long-term skin health.", icon: Flower2, image: "https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80" },
+  { name: "Laser Treatment", description: "Targeted light therapies designed to clarify tone, refine texture, and reduce visible imperfections with minimal downtime.", icon: Zap, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80" },
+  { name: "Body Sculpting & Treatment", description: "Non-surgical contouring and tone-focused treatments tailored to sculpt, firm, and redefine your silhouette.", icon: Waves, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" },
+  { name: "IV Infusion Therapy", description: "Clinician-guided hydration and nutrient support to restore energy, optimise recovery, and support everyday wellbeing.", icon: Activity, image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" },
+  { name: "Weight Management", description: "A medically informed, sustainable approach to metabolism, energy, and healthy lifestyle changes that last.", icon: Target, image: "https://images.unsplash.com/photo-1541534401786-8ac06c4d1d6c?auto=format&fit=crop&w=900&q=80" },
 ];
 
 const pillars = [
@@ -126,8 +126,8 @@ function BrandLogo({ className = "", footer = false }: { className?: string; foo
   }
 
   const style = footer
-    ? { width: "calc(16rem * 0.9 * 0.9)", height: "auto" }
-    : { width: "auto", height: "calc(3.5rem * 1.188 * 1.1)" };
+    ? { width: "calc(16rem * 0.9 * 0.9 * 1.21)", height: "auto" }
+    : { width: "auto", height: "calc(3.5rem * 1.188 * 1.1 * 1.1 * 1.1)" };
 
   return (
     <img
@@ -162,6 +162,7 @@ function BrandMark() {
 function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: boolean; onOpenChange: (open: boolean) => void; defaultTreatment?: string }) {
   const [step, setStep] = useState<"form" | "success">("form");
   const [treatment, setTreatment] = useState(defaultTreatment);
+  const [preferredDate, setPreferredDate] = useState("");
   const [preferredTime, setPreferredTime] = useState("");
 
   function handleOpenChange(next: boolean) {
@@ -175,10 +176,11 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
     const name = (form.querySelector('#name') as HTMLInputElement)?.value || "";
     const phone = (form.querySelector('#phone') as HTMLInputElement)?.value || "";
     const email = (form.querySelector('#email') as HTMLInputElement)?.value || "";
-    const date = (form.querySelector('#date') as HTMLInputElement)?.value || "";
+    const date = preferredDate || "";
     const time = preferredTime || "";
 
-    const message = [
+    const subject = encodeURIComponent('New consultation request');
+    const body = encodeURIComponent([
       'New consultation request',
       '',
       `Name: ${name}`,
@@ -187,12 +189,10 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
       `Treatment: ${treatment}`,
       `Preferred date: ${date}`,
       `Preferred time: ${time}`,
-    ].join('\n');
-    const waNumber = '2349111871264';
-    const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(message)}`;
+    ].join('\n'));
+    const recipient = 'info@sofiajofielmedspa.com';
 
-    // Open WhatsApp directly to the contact chat with the message prefilled
-    window.open(waUrl, '_blank');
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     setStep("success");
   }
 
@@ -241,12 +241,18 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                 </div>
                 {/* Preferred clinic removed; single office */}
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <div className="space-y-2"><Label htmlFor="date">Preferred date</Label><Input id="date" type="date" required className="h-11 rounded-none" /></div>
+                  <div className="space-y-2"><Label htmlFor="date">Preferred date</Label><Input id="date" type="date" value={preferredDate} onChange={(event) => setPreferredDate(event.target.value)} required className="h-11 rounded-none" /></div>
                   <div className="space-y-2">
                     <Label>Preferred time</Label>
                     <Select value={preferredTime} onValueChange={setPreferredTime} required>
                       <SelectTrigger className="h-11 rounded-none"><SelectValue placeholder="Select time" /></SelectTrigger>
-                      <SelectContent><SelectItem value="morning">Morning</SelectItem><SelectItem value="afternoon">Afternoon</SelectItem><SelectItem value="evening">Evening</SelectItem></SelectContent>
+                      <SelectContent>
+                        <SelectItem value="9:00AM">9:00AM</SelectItem>
+                        <SelectItem value="11:00AM">11:00AM</SelectItem>
+                        <SelectItem value="1:00PM">1:00PM</SelectItem>
+                        <SelectItem value="3:00PM">3:00PM</SelectItem>
+                        <SelectItem value="4:00PM">4:00PM</SelectItem>
+                      </SelectContent>
                     </Select>
                   </div>
                 </div>
@@ -360,9 +366,10 @@ function Index() {
           <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4">
             {treatments.map((item, index) => {
               const Icon = item.icon;
-              return <article key={item.name} className="treatment-card group relative border-b border-border px-5 py-9 sm:border-r sm:px-7 lg:min-h-[22rem] lg:px-8 lg:py-10" style={{ animationDelay: `${index * 80}ms` }}>
+              return <article key={item.name} className="treatment-card group relative border-b border-border px-5 py-9 sm:border-r sm:px-7 lg:min-h-[26rem] lg:px-8 lg:py-10" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="mb-5 overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')`, height: "12rem" }} aria-label={item.name} />
                 <div className="flex items-start justify-between"><span className="flex size-11 items-center justify-center border border-gold/40 text-gold"><Icon className="size-5" strokeWidth={1.5} /></span><span className="text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</span></div>
-                <h3 className="mt-10 font-display text-2xl leading-tight">{item.name}</h3><p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
+                <h3 className="mt-8 font-display text-2xl leading-tight">{item.name}</h3><p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
                 <Button variant="link" onClick={() => openBooking(item.name)} className="mt-7 h-auto p-0 text-xs uppercase text-foreground no-underline">Inquire / Book <ChevronRight className="transition-transform group-hover:translate-x-1" /></Button>
               </article>;
             })}
@@ -481,7 +488,7 @@ function Index() {
                 </div>
               </div>
             </div>
-             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-white/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:booking@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> booking@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
+             <div><h3 className="footer-title">Contact</h3><div className="mt-5 space-y-3 break-words text-sm text-white/70"><a href="tel:+2349111871264" className="flex items-center gap-3 hover:text-gold"><Phone className="size-4 shrink-0" /> Call Us Now</a><a href="mailto:info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> info@sofiajofielmedspa.com</a><a href="mailto:Info@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Info@sofiajofielmedspa.com</a><a href="mailto:Support@sofiajofielmedspa.com" className="flex items-center gap-3 hover:text-gold"><Mail className="size-4 shrink-0" /> Support@sofiajofielmedspa.com</a></div></div>
           </div>
            <div className="flex flex-col gap-3 pt-7 text-[0.65rem] uppercase text-white/40 sm:flex-row sm:justify-between"><p>© 2026 Sofia Jofiel Medical Aesthetics &amp; Spa</p><p>Privacy · Terms · Clinical standards</p></div>
         </div>
@@ -497,7 +504,7 @@ function Index() {
             <Button onClick={() => openBooking()} className="h-14 w-full justify-between rounded-none px-5">Request a consultation <CalendarDays /></Button>
             <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="https://wa.link/axqkwx" target="_blank" rel="noreferrer">Send us a WhatsApp Message <Send /></a></Button>
             <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="tel:+2349111871264">Call our concierge <Phone /></a></Button>
-            <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:booking@sofiajofielmedspa.com">Email bookings <Mail /></a></Button>
+            <Button variant="outline" asChild className="h-14 w-full justify-between rounded-none px-5"><a href="mailto:info@sofiajofielmedspa.com">Email bookings <Mail /></a></Button>
             <p className="pt-2 text-center text-xs text-muted-foreground">Concierge hours: Monday — Saturday, 9am — 6pm</p>
           </div>
         </DialogContent>
