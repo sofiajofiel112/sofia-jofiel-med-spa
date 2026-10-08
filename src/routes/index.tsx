@@ -29,8 +29,10 @@ import {
   Zap,
 } from "lucide-react";
 
+import bodySculptingImage from "@/assets/body-sculpting-treatment.jpg";
 import botoxImage from "@/assets/botox.avif";
 import consultationImage from "@/assets/aura-consultation.jpg";
+import laserImage from "@/assets/aura-treatment-room.jpg";
 import logoAsset from "@/assets/sofia-jofiel-logo.png";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,10 +55,10 @@ import {
 const treatments = [
   { name: "Skin Consultation", description: "Thoughtful, one-to-one evaluation of your skin goals, concerns, and treatment history to build a clear, personalised plan.", icon: CircleUserRound, image: consultationImage },
   { name: "Botox Treatments", description: "Precision-led wrinkle softening that smooths expression lines while preserving the natural movement and character of your face.", icon: Syringe, image: botoxImage },
-  { name: "Dermal Fillers", description: "Strategic volume restoration and contour refinement to enhance balance, lift, and definition with natural-looking results.", icon: Droplets, image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
+  { name: "Derma Fillers", description: "Strategic volume restoration and contour refinement to enhance balance, lift, and definition with natural-looking results.", icon: Droplets, image: botoxImage },
   { name: "Medical-Grade Facials", description: "Deeply renewing rituals that target congestion, luminosity, hydration, and long-term skin health.", icon: Flower2, image: "https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80" },
-  { name: "Laser Treatment", description: "Targeted light therapies designed to clarify tone, refine texture, and reduce visible imperfections with minimal downtime.", icon: Zap, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80" },
-  { name: "Body Sculpting & Treatment", description: "Non-surgical contouring and tone-focused treatments tailored to sculpt, firm, and redefine your silhouette.", icon: Waves, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" },
+  { name: "Laser Treatment", description: "Targeted light therapies designed to clarify tone, refine texture, and reduce visible imperfections with minimal downtime.", icon: Zap, image: laserImage },
+  { name: "Body Sculpting & Treatment", description: "Non-surgical contouring and tone-focused treatments tailored to sculpt, firm, and redefine your silhouette.", icon: Waves, image: bodySculptingImage },
   { name: "IV Infusion Therapy", description: "Clinician-guided hydration and nutrient support to restore energy, optimise recovery, and support everyday wellbeing.", icon: Activity, image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" },
   { name: "Weight Management", description: "A medically informed, sustainable approach to metabolism, energy, and healthy lifestyle changes that last.", icon: Target, image: "https://images.unsplash.com/photo-1541534401786-8ac06c4d1d6c?auto=format&fit=crop&w=900&q=80" },
 ];
