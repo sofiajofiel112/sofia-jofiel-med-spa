@@ -231,7 +231,7 @@ function prepareFlutterwaveCheckout(service: { service: string; amount: number }
     FlutterwaveCheckout({
       public_key: publicKey,
       tx_ref: txRef,
-      amount: service.amount / 100,
+      amount: Number(service.amount),
       currency: "NGN",
       payment_options: "card,banktransfer,ussd,account,bank,qr,barter",
       redirect_url: redirectUrl,
