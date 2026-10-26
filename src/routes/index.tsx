@@ -31,7 +31,11 @@ import {
 
 import botoxImage from "@/assets/botox.avif";
 import consultationImage from "@/assets/aura-consultation.jpg";
-import creamImage from "@/assets/cream.jpeg";
+import darkDanBrighteningCreamImage from "@/assets/DarkDan-27.jpg";
+import darkDanEnzymeWashImage from "@/assets/DarkDan-28.jpg";
+import darkDanProbioticSerumImage from "@/assets/DarkDan-30.jpg";
+import darkDanOatCleanserImage from "@/assets/DarkDan-31.jpg";
+import darkDanHydratingSerumImage from "@/assets/DarkDan.jpg";
 import fillerImage from "@/assets/filler.jpeg";
 import ivImage from "@/assets/iv.jpeg";
 import laserImage from "@/assets/laser.jpg";
@@ -287,25 +291,25 @@ const galleryHighlights = [
     label: "Skin rituals",
     title: "Calm, clinical, and deeply restorative.",
     description: "Medical-grade facials and skin correction plans that leave you refreshed, supported, and visibly brighter.",
-    image: "https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80",
+    image: darkDanBrighteningCreamImage,
   },
   {
     label: "Confidence-first aesthetics",
     title: "Natural balance, beautifully refined.",
     description: "Subtle treatments designed to restore harmony, soften lines, and enhance what is already beautifully yours.",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80",
+    image: darkDanHydratingSerumImage,
   },
   {
     label: "Wellness-led care",
     title: "A softer, more radiant everyday glow.",
     description: "From hydration support to tailored wellness rituals, our approach keeps your skin and wellbeing in sync.",
-    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80",
+    image: darkDanOatCleanserImage,
   },
   {
     label: "Private clinic feel",
     title: "Luxury details that put you at ease.",
     description: "An intimate environment, thoughtful service, and expert guidance from consultation through aftercare.",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+    image: darkDanEnzymeWashImage,
   },
 ];
 
@@ -542,7 +546,7 @@ function Index() {
 
   return (
     <main id="top" className="overflow-x-clip bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur-md">
+      <header className="site-header sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <BrandMark />
           <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
@@ -563,9 +567,9 @@ function Index() {
         {menuOpen && <nav className="border-t border-border bg-background px-5 py-6 lg:hidden"><Link to="/services" onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">Services</Link>{[["Treatments", "#treatments"], ["Gallery", "#gallery"], ["About", "#about"], ["Philosophy", "#philosophy"], ["Contact", "#contact"]].map(([item, href]) => <a key={item} href={href} onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">{item}</a>)}<Button onClick={() => openBooking()} className="mt-6 h-12 w-full rounded-none">Book consultation</Button></nav>}
       </header>
 
-      <section className="relative min-h-[calc(100svh-5rem)] border-b border-border lg:min-h-[calc(100vh-5rem)]">
+      <section className="home-hero relative min-h-[calc(100svh-5rem)] border-b border-border lg:min-h-[calc(100vh-5rem)]">
         <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[90rem] lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="relative z-10 flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
+          <div className="home-hero-copy relative z-10 flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
             <div className="max-w-3xl">
               <div className="motion-reveal flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
                <h1 className="motion-reveal mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
@@ -581,29 +585,29 @@ function Index() {
             </div>
           </div>
           <div className="hero-visual relative min-h-[48rem] overflow-hidden lg:min-h-0">
-             <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80" alt="Luxury spa treatment room in a premium med spa" width={1200} height={1600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-foreground/45 to-transparent p-7 text-primary-foreground sm:p-10">
+             <img src={darkDanProbioticSerumImage} alt="Sofia Jofiel antioxidant probiotic serum" width={2025} height={2700} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
+            <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between bg-gradient-to-t from-black/75 via-black/25 to-transparent p-7 text-white sm:p-10">
               <p className="max-w-xs font-display text-2xl">Quiet luxury.<br />Confident care.</p><p className="text-right text-[0.65rem] uppercase leading-5">Private rooms<br />Thoughtful details</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border bg-card/40 px-5 py-20 sm:px-10 lg:py-24">
+      <section className="signature-section border-b border-border px-5 py-20 sm:px-10 lg:py-24">
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className=" rounded-none border border-gold/20 bg-background/40 p-8 sm:p-10">
+            <div className="rounded-none border border-gold/20 bg-background/40 p-8 sm:p-10">
               <p className="section-label">Signature care</p>
               <h2 className="mt-5 max-w-xl font-display text-4xl leading-[1.02] sm:text-6xl">Luxury aesthetics, grounded in clinical expertise.</h2>
               <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">Every Sofia Jofiel treatment begins with listening, skin analysis, and a tailored plan that balances visible refinement with natural, confident results.</p>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Consultation</p><p className="mt-3 font-display text-3xl">01</p><p className="mt-2 text-sm leading-6 text-muted-foreground">In-depth assessment and treatment mapping.</p></div>
-                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Precision</p><p className="mt-3 font-display text-3xl">02</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Clinician-led protocols and safe medical standards.</p></div>
-                <div className="border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Aftercare</p><p className="mt-3 font-display text-3xl">03</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Thoughtful guidance for lasting, natural results.</p></div>
+                <div className="signature-step border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Consultation</p><p className="mt-3 font-display text-3xl">01</p><p className="mt-2 text-sm leading-6 text-muted-foreground">In-depth assessment and treatment mapping.</p></div>
+                <div className="signature-step border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Precision</p><p className="mt-3 font-display text-3xl">02</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Clinician-led protocols and safe medical standards.</p></div>
+                <div className="signature-step border border-border bg-card/80 p-4"><p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Aftercare</p><p className="mt-3 font-display text-3xl">03</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Thoughtful guidance for lasting, natural results.</p></div>
               </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="min-h-[18rem] overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521590832167-7ae74b1fcd05?auto=format&fit=crop&w=900&q=80')" }} aria-label="Client treatment room" />
+              <div className="aspect-[3/4] w-full max-w-[14rem] self-center overflow-hidden border border-border bg-[#dfe3e8] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('${darkDanBrighteningCreamImage}')` }} role="img" aria-label="Sofia Jofiel brightening ceramide cream" />
               <div className="flex flex-col justify-between border border-border bg-card/80 p-5">
                 <div>
                   <p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Why clients choose us</p>
@@ -617,7 +621,7 @@ function Index() {
                     <p className="text-[0.62rem] uppercase tracking-[0.24em] text-gold">Private clinic experience</p>
                     <p className="mt-3 font-display text-3xl leading-tight">Designed for comfort, confidence, and calm.</p>
                   </div>
-                  <div className="h-24 w-full max-w-[18rem] overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80')" }} aria-label="Luxury treatment clinic interior" />
+                  <div className="aspect-[3/4] w-full max-w-[14rem] shrink-0 overflow-hidden border border-border bg-[#dfe3e8] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('${darkDanEnzymeWashImage}')` }} role="img" aria-label="Sofia Jofiel brightening enzyme face wash" />
                 </div>
               </div>
             </div>
@@ -631,10 +635,10 @@ function Index() {
             <div><p className="section-label">Our expertise</p><h2 className="mt-4 font-display text-5xl sm:text-6xl">Treatments, <em className="font-normal text-gold">refined.</em></h2></div>
             <p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">Every service begins with a considered consultation and a clear, personalised plan; because the most beautiful results should always feel like you.</p>
           </div>
-          <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
             {treatments.map((item, index) => {
               const Icon = item.icon;
-              return <article key={item.name} className="treatment-card group relative border-b border-border px-5 py-9 sm:border-r sm:px-7 lg:min-h-[26rem] lg:px-8 lg:py-10" style={{ animationDelay: `${index * 80}ms` }}>
+              return <article key={item.name} className="treatment-card group relative border border-border bg-background px-5 py-9 sm:px-7 lg:min-h-[26rem] lg:px-8 lg:py-10" style={{ animationDelay: `${index * 80}ms` }}>
                 <div className="mb-5 overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')`, height: "12rem" }} aria-label={item.name} />
                 <div className="flex items-start justify-between"><span className="flex size-11 items-center justify-center border border-gold/40 text-gold"><Icon className="size-5" strokeWidth={1.5} /></span><span className="text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</span></div>
                 <h3 className="mt-8 font-display text-2xl leading-tight">{item.name}</h3><p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
@@ -645,7 +649,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-[#151515] px-5 py-24 sm:px-10 lg:py-32">
+      <section className="editorial-section border-t border-border px-5 py-24 sm:px-10 lg:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div className="space-y-6">
@@ -659,7 +663,7 @@ function Index() {
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="hero-visual relative min-h-[20rem] overflow-hidden border border-border bg-cover bg-center sm:min-h-[24rem]" style={{ backgroundImage: `url('${creamImage}')` }} aria-label="Sofia Jofiel aesthetic treatment" />
+              <div className="hero-visual relative min-h-[20rem] overflow-hidden border border-border bg-cover bg-center sm:min-h-[24rem]" style={{ backgroundImage: `url('${darkDanHydratingSerumImage}')` }} aria-label="Sofia Jofiel hydrating peptide serum" />
               <div className="flex min-h-[20rem] flex-col justify-between border border-border bg-card/80 p-5 sm:min-h-[24rem]">
                 <div>
                   <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Signature approach</p>
@@ -673,7 +677,7 @@ function Index() {
                     <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">Designed for modern living</p>
                     <p className="mt-3 font-display text-3xl leading-tight">Thoughtful treatment, real-world results.</p>
                   </div>
-                  <div className="h-28 overflow-hidden border border-border bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80')" }} aria-label="Luxury med spa interior" />
+                  <div className="aspect-[3/4] w-full max-w-[14rem] justify-self-end overflow-hidden border border-border bg-[#dfe3e8] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('${darkDanOatCleanserImage}')` }} role="img" aria-label="Sofia Jofiel hydrating oat face wash" />
                 </div>
               </div>
             </div>
@@ -693,8 +697,8 @@ function Index() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {galleryHighlights.map((item) => (
-              <article key={item.title} className="overflow-hidden border border-border bg-background">
-                <div className="h-72 bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')` }} aria-label={item.title} />
+              <article key={item.title} className="gallery-card overflow-hidden border border-border bg-background">
+                <div className="h-72 bg-[#dfe3e8] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('${item.image}')` }} role="img" aria-label={item.title} />
                 <div className="p-5">
                   <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold">{item.label}</p>
                   <h3 className="mt-3 font-display text-2xl leading-tight">{item.title}</h3>
@@ -706,9 +710,9 @@ function Index() {
         </div>
       </section>
 
-      <section id="about" className="scroll-mt-20 bg-sage py-24 lg:py-0">
+      <section id="about" className="about-section scroll-mt-20 bg-sage py-24 lg:py-0">
         <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
-           <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src={creamImage} alt="Spa massage scene in a premium wellness clinic" width={1200} height={912} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
+           <div className="hero-visual relative min-h-[34rem] lg:min-h-[52rem]"><img src={darkDanProbioticSerumImage} alt="Sofia Jofiel antioxidant probiotic serum" width={2025} height={2700} loading="lazy" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 border border-primary-foreground/30 bg-foreground/75 px-5 py-4 text-primary-foreground backdrop-blur-sm"><p className="text-[0.65rem] uppercase">The Sofia Jofiel standard</p><p className="mt-1 font-display text-xl">Subtle. Personal. Assured.</p></div></div>
           <div id="philosophy" className="scroll-mt-20 px-5 py-20 sm:px-12 lg:flex lg:flex-col lg:justify-center lg:px-20">
             <p className="section-label">Our philosophy</p><h2 className="mt-5 max-w-xl font-display text-5xl leading-[1.04] sm:text-6xl">The science of beauty, guided by <em className="font-normal text-gold">care.</em></h2><p className="mt-7 max-w-xl text-base leading-8 text-sage-foreground/75">We believe aesthetic medicine is at its best when expertise, restraint, and genuine human connection come together.</p>
             <div className="mt-12 divide-y divide-sage-foreground/15 border-y border-sage-foreground/15">
@@ -718,7 +722,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden px-5 py-24 text-center sm:px-10 lg:py-36">
+      <section className="closing-section relative overflow-hidden px-5 py-24 text-center sm:px-10 lg:py-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,151,78,0.18),transparent_38%)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-4xl">
           <p className="section-label">Begin your journey</p>
@@ -762,7 +766,7 @@ function Index() {
         </div>
       </footer>
 
-      <Button aria-label="Instant booking and support" onClick={() => setConciergeOpen(true)} className="fixed bottom-5 right-5 z-30 h-14 rounded-full px-5 shadow-luxury sm:bottom-7 sm:right-7"><MessageCircle className="size-5" /><span className="hidden text-xs uppercase sm:inline">Instant booking &amp; support</span></Button>
+      <Button aria-label="Instant booking and support" onClick={() => setConciergeOpen(true)} className="booking-float fixed bottom-5 right-5 z-30 h-14 rounded-full px-5 shadow-luxury sm:bottom-7 sm:right-7"><MessageCircle className="size-5" /><span className="hidden text-xs uppercase sm:inline">Instant booking &amp; support</span></Button>
 
       <BookingDialog key={selectedTreatment || "general"} open={bookingOpen} onOpenChange={setBookingOpen} defaultTreatment={selectedTreatment} />
       <Dialog open={conciergeOpen} onOpenChange={setConciergeOpen}>
