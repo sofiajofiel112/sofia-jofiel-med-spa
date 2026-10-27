@@ -44,6 +44,7 @@ import medicalFacialImage from "@/assets/medical.jpeg";
 import sculptingImage from "@/assets/sculpting.jpeg";
 import weightManagementImage from "@/assets/weight.jpeg";
 import { Button } from "@/components/ui/button";
+import PristinumDynCheckout from "@/components/checkout-button";
 import {
   Dialog,
   DialogContent,
@@ -189,97 +190,6 @@ function getServiceSuggestions(selectedTreatment: string) {
   }).slice(0, 12) || pricingCatalog.slice(0, 8);
 }
 
-function sendConsultationEmail(payload: Record<string, string>) {
-  const subject = encodeURIComponent("New consultation request");
-  const body = encodeURIComponent([
-    "New consultation request",
-    "",
-    `Name: ${payload.name}`,
-    `Phone: ${payload.phone}`,
-    `Email: ${payload.email}`,
-    `Treatment: ${payload.treatment}`,
-    `Selected service: ${payload.service}`,
-    `Price: ${payload.price}`,
-    `Preferred date: ${payload.date}`,
-    `Preferred time: ${payload.time}`,
-  ].join("\n"));
-
-  window.location.href = `mailto:info@sofiajofielmedspa.com?subject=${subject}&body=${body}`;
-}
-
-function prepareFlutterwaveCheckout(service: { service: string; amount: number }, payload: Record<string, string>) {
-  const publicKey = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY as string | undefined;
-  if (!publicKey) {
-    window.alert("Flutterwave payment is not configured yet. Add VITE_FLUTTERWAVE_PUBLIC_KEY to enable live checkout.");
-    return;
-  }
-
-  const txRef = `sj-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
-  const redirectUrl = `${window.location.origin}/booking-success?status=successful&tx_ref=${encodeURIComponent(txRef)}`;
-
-  sessionStorage.setItem(
-    "pendingConsultation",
-    JSON.stringify({ ...payload, service: service.service, price: formatPrice(service.amount), tx_ref: txRef }),
-  );
-
-  const scriptId = "flutterwave-checkout-script";
-  const openCheckout = () => {
-    const FlutterwaveCheckout = (window as typeof window & { FlutterwaveCheckout?: (config: Record<string, unknown>) => void })
-      .FlutterwaveCheckout;
-
-    if (typeof FlutterwaveCheckout !== "function") {
-      window.alert("Flutterwave checkout failed to load. Please try again.");
-      return;
-    }
-
-    FlutterwaveCheckout({
-      public_key: publicKey,
-      tx_ref: txRef,
-      amount: Number(service.amount),
-      currency: "NGN",
-      payment_options: "card,banktransfer,ussd,account,bank,qr,barter",
-      redirect_url: redirectUrl,
-      customer: {
-        email: payload.email || "guest@example.com",
-        phone_number: payload.phone || "",
-        name: payload.name || "Sofia Jofiel client",
-      },
-      customizations: {
-        title: "Sofia Jofiel Medical Aesthetics & Spa",
-        description: `Payment for ${service.service}`,
-      },
-      meta: {
-        service: service.service,
-        treatment: payload.treatment || "Consultation",
-      },
-      callback: (response: { tx_ref?: string; status?: string }) => {
-        const nextStatus = response?.status || "successful";
-        const nextTxRef = response?.tx_ref || txRef;
-        window.location.href = `${window.location.origin}/booking-success?status=${encodeURIComponent(nextStatus)}&tx_ref=${encodeURIComponent(nextTxRef)}`;
-      },
-      onclose: () => {
-        console.info("Flutterwave checkout closed without completing payment.");
-      },
-    });
-  };
-
-  const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
-  if (existingScript) {
-    openCheckout();
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.id = scriptId;
-  script.src = "https://checkout.flutterwave.com/v3.js";
-  script.async = true;
-  script.onload = openCheckout;
-  script.onerror = () => {
-    window.alert("Flutterwave checkout failed to load. Please try again.");
-  };
-  document.body.appendChild(script);
-}
-
 const pillars = [
   { number: "01", title: "Expert Clinical Practitioners", text: "Our experienced clinicians combine medical precision with an artist's eye for beautifully subtle results.", icon: ShieldCheck },
   { number: "02", title: "State-of-the-Art Technology", text: "We invest in proven, advanced technologies selected for safety, comfort, and exceptional outcomes.", icon: Microscope },
@@ -381,10 +291,11 @@ function BrandMark() {
 }
 
 function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: boolean; onOpenChange: (open: boolean) => void; defaultTreatment?: string }) {
-  const [step, setStep] = useState<"form" | "success">("form");
+  const [step, setStep] = useState<"form" | "service" | "success">("form");
   const [treatment, setTreatment] = useState(defaultTreatment);
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTime, setPreferredTime] = useState("");
+  const [customer, setCustomer] = useState({ name: "", phone: "", email: "" });
 
   function handleOpenChange(next: boolean) {
     onOpenChange(next);
@@ -404,6 +315,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
       date: preferredDate || "",
       time: preferredTime || "",
     };
+    setCustomer({ name: payload.name, phone: payload.phone, email: payload.email });
 
     const suggestions = getServiceSuggestions(payload.treatment);
     const fallback = suggestions[0] ?? { category: "Consultation", service: "Consultation", amount: 30000 };
@@ -411,15 +323,6 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
     sessionStorage.setItem("pendingConsultation", JSON.stringify({ ...payload, service: fallback.service, price: formatPrice(fallback.amount) }));
     setSelectedService(fallback);
     setStep("service");
-  }
-
-  function completePayment() {
-    if (!selectedService) return;
-
-    const stored = sessionStorage.getItem("pendingConsultation");
-    const payload = stored ? JSON.parse(stored) : { name: "", phone: "", email: "", treatment: treatment || "Consultation", date: preferredDate || "", time: preferredTime || "" };
-
-    prepareFlutterwaveCheckout(selectedService, payload);
   }
 
   useEffect(() => {
@@ -469,7 +372,28 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
             </div>
             <div className="mt-7 flex gap-3">
               <Button type="button" variant="outline" className="h-11 rounded-none px-5 uppercase" onClick={() => setStep("form")}>Back</Button>
-              <Button type="button" className="h-11 flex-1 rounded-none px-5 uppercase" onClick={completePayment} disabled={!selectedService}>Continue to payment</Button>
+              {selectedService && (
+                <PristinumDynCheckout
+                  key={selectedService.service}
+                  amount={selectedService.amount}
+                  customerName={customer.name}
+                  customerEmail={customer.email}
+                  customerPhone={customer.phone}
+                  onPaymentStart={(txRef) => {
+                    const stored = sessionStorage.getItem("pendingConsultation");
+                    const payload = stored ? JSON.parse(stored) : {};
+                    sessionStorage.setItem(
+                      "pendingConsultation",
+                      JSON.stringify({
+                        ...payload,
+                        service: selectedService.service,
+                        price: formatPrice(selectedService.amount),
+                        tx_ref: txRef,
+                      }),
+                    );
+                  }}
+                />
+              )}
             </div>
           </div>
         ) : (

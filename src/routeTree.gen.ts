@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookingSuccessRouteImport } from './routes/booking-success'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ApiFlutterwaveVerifyRouteImport } from './routes/api/flutterwave/verify'
+import { Route as ApiFlutterwaveWebhookRouteImport } from './routes/api/flutterwave/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +30,69 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFlutterwaveVerifyRoute = ApiFlutterwaveVerifyRouteImport.update({
+  id: '/api/flutterwave/verify',
+  path: '/api/flutterwave/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFlutterwaveWebhookRoute = ApiFlutterwaveWebhookRouteImport.update({
+  id: '/api/flutterwave/webhook',
+  path: '/api/flutterwave/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
+  '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
+  '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
+  '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/booking-success' | '/services'
+  fullPaths:
+    | '/'
+    | '/booking-success'
+    | '/services'
+    | '/api/flutterwave/verify'
+    | '/api/flutterwave/webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/booking-success' | '/services'
-  id: '__root__' | '/' | '/booking-success' | '/services'
+  to:
+    | '/'
+    | '/booking-success'
+    | '/services'
+    | '/api/flutterwave/verify'
+    | '/api/flutterwave/webhook'
+  id:
+    | '__root__'
+    | '/'
+    | '/booking-success'
+    | '/services'
+    | '/api/flutterwave/verify'
+    | '/api/flutterwave/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingSuccessRoute: typeof BookingSuccessRoute
   ServicesRoute: typeof ServicesRoute
+  ApiFlutterwaveVerifyRoute: typeof ApiFlutterwaveVerifyRoute
+  ApiFlutterwaveWebhookRoute: typeof ApiFlutterwaveWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +118,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/flutterwave/verify': {
+      id: '/api/flutterwave/verify'
+      path: '/api/flutterwave/verify'
+      fullPath: '/api/flutterwave/verify'
+      preLoaderRoute: typeof ApiFlutterwaveVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/flutterwave/webhook': {
+      id: '/api/flutterwave/webhook'
+      path: '/api/flutterwave/webhook'
+      fullPath: '/api/flutterwave/webhook'
+      preLoaderRoute: typeof ApiFlutterwaveWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +139,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingSuccessRoute: BookingSuccessRoute,
   ServicesRoute: ServicesRoute,
+  ApiFlutterwaveVerifyRoute: ApiFlutterwaveVerifyRoute,
+  ApiFlutterwaveWebhookRoute: ApiFlutterwaveWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

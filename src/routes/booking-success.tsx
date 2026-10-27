@@ -12,36 +12,60 @@ function BookingSuccessPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const status = params.get("status");
+    const txRef = params.get("tx_ref");
     const stored = sessionStorage.getItem("pendingConsultation");
 
-    if (status === "successful" && stored) {
-      const payload = JSON.parse(stored);
-      const subject = encodeURIComponent("New consultation request");
-      const body = encodeURIComponent([
-        "New consultation request",
-        "",
-        `Name: ${payload.name ?? ""}`,
-        `Phone: ${payload.phone ?? ""}`,
-        `Email: ${payload.email ?? ""}`,
-        `Treatment: ${payload.treatment ?? ""}`,
-        `Selected service: ${payload.service ?? ""}`,
-        `Price: ${payload.price ?? ""}`,
-        `Preferred date: ${payload.date ?? ""}`,
-        `Preferred time: ${payload.time ?? ""}`,
-      ].join("\n"));
+    async function verifyPayment() {
+      if (status !== "successful" || !txRef) {
+        if (status === "successful") {
+          setMessage("Payment was successful, but no pending request was found. Please contact the clinic directly.");
+          return;
+        }
 
-      sessionStorage.removeItem("pendingConsultation");
-      window.location.href = `mailto:info@sofiajofielmedspa.com?subject=${subject}&body=${body}`;
-      setMessage("Your payment was successful. Your request is being sent to the clinic.");
-      return;
+        setMessage("Payment was not completed. Your consultation request remains saved in the booking flow if you want to try again.");
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/flutterwave/verify?tx_ref=${encodeURIComponent(txRef)}`);
+        const payload = await response.json();
+
+        if (!response.ok || payload.verified === false) {
+          setMessage("Payment verification is still pending. Please contact the clinic if this does not clear shortly.");
+          return;
+        }
+
+        if (stored) {
+          const consultation = JSON.parse(stored);
+          const subject = encodeURIComponent("New consultation request");
+          const body = encodeURIComponent([
+            "New consultation request",
+            "",
+            `Name: ${consultation.name ?? ""}`,
+            `Phone: ${consultation.phone ?? ""}`,
+            `Email: ${consultation.email ?? ""}`,
+            `Treatment: ${consultation.treatment ?? ""}`,
+            `Selected service: ${consultation.service ?? ""}`,
+            `Price: ${consultation.price ?? ""}`,
+            `Preferred date: ${consultation.date ?? ""}`,
+            `Preferred time: ${consultation.time ?? ""}`,
+            `Flutterwave tx_ref: ${payload.tx_ref ?? txRef}`,
+          ].join("\n"));
+
+          sessionStorage.removeItem("pendingConsultation");
+          window.location.href = `mailto:info@sofiajofielmedspa.com?subject=${subject}&body=${body}`;
+          setMessage("Your payment was successful. Your request is being sent to the clinic.");
+          return;
+        }
+
+        setMessage("Payment was successful, but no pending request was found. Please contact the clinic directly.");
+      } catch (error) {
+        console.error("Payment verification request failed.", error);
+        setMessage("Payment confirmation is being checked. Please contact the clinic if this page does not resolve shortly.");
+      }
     }
 
-    if (status === "successful") {
-      setMessage("Payment was successful, but no pending request was found. Please contact the clinic directly.");
-      return;
-    }
-
-    setMessage("Payment was not completed. Your consultation request remains saved in the booking flow if you want to try again.");
+    void verifyPayment();
   }, []);
 
   return (
