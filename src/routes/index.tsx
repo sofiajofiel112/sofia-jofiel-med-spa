@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Activity,
   ArrowRight,
@@ -54,6 +54,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -296,6 +297,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTime, setPreferredTime] = useState("");
   const [customer, setCustomer] = useState({ name: "", phone: "", email: "" });
+  const dateInputRef = useRef<HTMLInputElement>(null);
 
   function handleOpenChange(next: boolean) {
     onOpenChange(next);
@@ -311,6 +313,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
       name: (form.querySelector('#name') as HTMLInputElement)?.value || "",
       phone: (form.querySelector('#phone') as HTMLInputElement)?.value || "",
       email: (form.querySelector('#email') as HTMLInputElement)?.value || "",
+      note: (form.querySelector("#note") as HTMLTextAreaElement)?.value || "",
       treatment: treatment || "Consultation",
       date: preferredDate || "",
       time: preferredTime || "",
@@ -428,9 +431,35 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                     <SelectContent>{treatments.map((item) => <SelectItem key={item.name} value={item.name}>{item.name}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="note">Note (optional)</Label>
+                  <Textarea id="note" placeholder="Tell us about any procedure you’re interested in that isn’t listed." rows={3} className="rounded-none" />
+                </div>
                 {/* Preferred clinic removed; single office */}
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <div className="space-y-2"><Label htmlFor="date">Preferred date</Label><Input id="date" type="date" value={preferredDate} onChange={(event) => setPreferredDate(event.target.value)} required className="h-11 rounded-none" /></div>
+                  <div className="space-y-2">
+                    <Label htmlFor="date">Preferred date</Label>
+                    <div className="relative">
+                      <Input ref={dateInputRef} id="date" type="date" value={preferredDate} onChange={(event) => setPreferredDate(event.target.value)} required className="h-11 rounded-none pr-10 [&::-webkit-calendar-picker-indicator]:opacity-0" />
+                      <button
+                        type="button"
+                        aria-label="Open calendar"
+                        title="Open calendar"
+                        onClick={() => {
+                          const dateInput = dateInputRef.current;
+                          if (!dateInput) return;
+                          if (typeof dateInput.showPicker === "function") dateInput.showPicker();
+                          else {
+                            dateInput.focus();
+                            dateInput.click();
+                          }
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gold hover:text-gold/80"
+                      >
+                        <CalendarDays aria-hidden="true" className="size-4" />
+                      </button>
+                    </div>
+                  </div>
                   <div className="space-y-2">
                     <Label>Preferred time</Label>
                     <Select value={preferredTime} onValueChange={setPreferredTime} required>

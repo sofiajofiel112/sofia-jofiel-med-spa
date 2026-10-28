@@ -45,6 +45,7 @@ function BookingSuccessPage() {
             `Phone: ${consultation.phone ?? ""}`,
             `Email: ${consultation.email ?? ""}`,
             `Treatment: ${consultation.treatment ?? ""}`,
+            `Note: ${consultation.note ?? ""}`,
             `Selected service: ${consultation.service ?? ""}`,
             `Price: ${consultation.price ?? ""}`,
             `Preferred date: ${consultation.date ?? ""}`,
