@@ -45,6 +45,7 @@ import sculptingImage from "@/assets/sculpting.jpeg";
 import weightManagementImage from "@/assets/weight.jpeg";
 import { Button } from "@/components/ui/button";
 import PristinumDynCheckout from "@/components/checkout-button";
+import { SiteNavigation } from "@/components/site-navigation";
 import {
   Dialog,
   DialogContent,
@@ -502,32 +503,42 @@ function Index() {
       <header className="site-header sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <BrandMark />
-          <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
-            <Link to="/services" className="text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-gold">Services</Link>
-            {[
-              ["Treatments", "#treatments"],
-              ["Gallery", "#gallery"],
-              ["About", "#about"],
-              ["Philosophy", "#philosophy"],
-              ["Contact", "#contact"],
-            ].map(([item, href]) => <a key={item} href={href} className="text-xs font-semibold uppercase text-muted-foreground transition-colors hover:text-gold">{item}</a>)}
-          </nav>
+          <SiteNavigation currentPage="home" />
           <div className="flex items-center gap-2">
             <Button onClick={() => openBooking()} className="hidden h-11 rounded-none px-6 text-xs uppercase sm:inline-flex">Book consultation</Button>
             <Button variant="ghost" size="icon" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">{menuOpen ? <X /> : <Menu />}</Button>
           </div>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-background px-5 py-6 lg:hidden"><Link to="/services" onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">Services</Link>{[["Treatments", "#treatments"], ["Gallery", "#gallery"], ["About", "#about"], ["Philosophy", "#philosophy"], ["Contact", "#contact"]].map(([item, href]) => <a key={item} href={href} onClick={() => setMenuOpen(false)} className="block border-b border-border py-4 font-display text-2xl">{item}</a>)}<Button onClick={() => openBooking()} className="mt-6 h-12 w-full rounded-none">Book consultation</Button></nav>}
+        {menuOpen && <><SiteNavigation currentPage="home" mobile onNavigate={() => setMenuOpen(false)} /><div className="px-5 pb-6 lg:hidden"><Button onClick={() => openBooking()} className="h-12 w-full rounded-none">Book consultation</Button></div></>}
       </header>
 
-      <section className="home-hero relative min-h-[calc(100svh-5rem)] border-b border-border lg:min-h-[calc(100vh-5rem)]">
-        <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[90rem] lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="home-hero-copy relative z-10 flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
-            <div className="max-w-3xl">
-              <div className="motion-reveal flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
-               <h1 className="motion-reveal mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
-               <p className="motion-reveal mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
-               <p className="motion-reveal mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury. We create plans that feel polished, personal, and entirely aligned with your lifestyle.</p>
+      <section className="home-hero relative min-h-[calc(100svh-5rem)] overflow-hidden border-b border-border lg:min-h-[calc(100vh-5rem)]">
+        <video
+          aria-hidden="true"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 size-full object-cover"
+        >
+          <source
+            src="https://videos.pexels.com/video-files/7423541/7423541-sd_960_540_30fps.mp4"
+            type="video/mp4"
+            media="(max-width: 767px)"
+          />
+          <source
+            src="https://videos.pexels.com/video-files/7423541/7423541-hd_1920_1080_30fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
+        <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-[90rem] items-center px-5 py-16 sm:px-10 lg:min-h-[calc(100vh-5rem)] lg:px-16 lg:py-24">
+          <div className="home-hero-copy relative max-w-3xl">
+            <div className="motion-reveal flex items-center gap-3 text-xs font-semibold uppercase text-gold"><span className="h-px w-10 bg-gold" /> Advanced aesthetics · Personalised care</div>
+             <h1 className="motion-reveal mt-8 max-w-3xl font-display text-[clamp(3.7rem,6.7vw,7.2rem)] font-normal leading-[0.9]">Sofia Jofiel</h1>
+             <p className="motion-reveal mt-5 max-w-3xl font-display text-3xl leading-tight text-foreground sm:text-5xl">Elevate your <em className="font-normal text-gold">natural beauty</em> with clinical excellence.</p>
+             <p className="motion-reveal mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">Bespoke aesthetic and wellness treatments where medical expertise meets thoughtful, understated luxury. We create plans that feel polished, personal, and entirely aligned with your lifestyle.</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="h-13 rounded-none px-7 text-xs uppercase"><a href="#treatments">Explore treatments <ArrowRight /></a></Button>
                 <Button variant="outline" onClick={() => setConciergeOpen(true)} className="h-13 rounded-none border-foreground/25 px-7 text-xs uppercase"><MessageCircle /> Direct support booking</Button>
@@ -535,13 +546,6 @@ function Index() {
               <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-[0.68rem] font-semibold uppercase text-muted-foreground">
                 <span className="flex items-center gap-2"><BadgeCheck className="size-4 text-gold" /> Clinician led</span><span className="flex items-center gap-2"><Leaf className="size-4 text-gold" /> Natural results</span><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-gold" /> Private care</span>
               </div>
-            </div>
-          </div>
-          <div className="hero-visual relative min-h-[48rem] overflow-hidden lg:min-h-0">
-             <img src={darkDanProbioticSerumImage} alt="Sofia Jofiel antioxidant probiotic serum" width={2025} height={2700} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
-            <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between bg-gradient-to-t from-black/75 via-black/25 to-transparent p-7 text-white sm:p-10">
-              <p className="max-w-xs font-display text-2xl">Quiet luxury.<br />Confident care.</p><p className="text-right text-[0.65rem] uppercase leading-5">Private rooms<br />Thoughtful details</p>
-            </div>
           </div>
         </div>
       </section>

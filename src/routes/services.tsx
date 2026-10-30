@@ -4,6 +4,7 @@ import { ArrowRight, CalendarDays, Clock3, Menu, ShieldCheck, X } from "lucide-r
 
 import darkDanBrighteningCreamImage from "@/assets/DarkDan-27.jpg";
 import logoAsset from "@/assets/sofia-jofiel-logo.png";
+import { SiteNavigation } from "@/components/site-navigation";
 
 const servicePricing = [
   { category: "Consultation", service: "Consultation", amount: 30000 },
@@ -92,15 +93,16 @@ function ServicesPage() {
       <header className="services-header sticky top-0 z-40 border-b border-white/10 bg-[#090806]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[5.25rem] max-w-[90rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-10">
           <Link to="/" aria-label="Sofia Jofiel home" className="shrink-0">
-            <img src={logoAsset} alt="Sofia Jofiel Medical Aesthetics & Spa" width={676} height={369} className="h-16 w-auto object-contain sm:h-[4.75rem]" />
+            <img
+              src={logoAsset}
+              alt="Sofia Jofiel Medical Aesthetics & Spa"
+              width={738}
+              height={296}
+              className="h-auto w-auto object-contain"
+              style={{ height: "calc(3.5rem * 1.188 * 1.1 * 1.1 * 1.1 * 1.1 * 1.1)" }}
+            />
           </Link>
-          <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
-            <Link to="/" className="services-nav-link">Home</Link>
-            <a href="/#treatments" className="services-nav-link">Treatments</a>
-            <a href="/#gallery" className="services-nav-link">Gallery</a>
-            <a href="/#about" className="services-nav-link">About</a>
-            <Link to="/services" aria-current="page" className="services-nav-link services-nav-active">Services &amp; prices</Link>
-          </nav>
+          <SiteNavigation currentPage="services" />
           <div className="flex shrink-0 items-center gap-3">
             <a href="/#contact" className="hidden h-11 items-center gap-2 bg-gold px-5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#111] transition hover:brightness-110 sm:inline-flex">
               Book consultation <ArrowRight size={15} />
@@ -117,14 +119,12 @@ function ServicesPage() {
           </div>
         </div>
         {menuOpen && (
-          <nav aria-label="Mobile navigation" className="border-t border-white/10 bg-[#090806] px-5 py-4 lg:hidden">
-            <Link to="/" onClick={() => setMenuOpen(false)} className="services-mobile-link">Home</Link>
-            <a href="/#treatments" onClick={() => setMenuOpen(false)} className="services-mobile-link">Treatments</a>
-            <a href="/#gallery" onClick={() => setMenuOpen(false)} className="services-mobile-link">Gallery</a>
-            <a href="/#about" onClick={() => setMenuOpen(false)} className="services-mobile-link">About</a>
-            <Link to="/services" onClick={() => setMenuOpen(false)} className="services-mobile-link text-gold">Services &amp; prices</Link>
-            <a href="/#contact" onClick={() => setMenuOpen(false)} className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 bg-gold text-xs font-semibold uppercase tracking-[0.12em] text-[#111]">Book consultation <ArrowRight size={15} /></a>
-          </nav>
+          <>
+            <SiteNavigation currentPage="services" mobile onNavigate={() => setMenuOpen(false)} />
+            <div className="px-5 pb-4 lg:hidden">
+              <a href="/#contact" onClick={() => setMenuOpen(false)} className="inline-flex h-12 w-full items-center justify-center gap-2 bg-gold text-xs font-semibold uppercase tracking-[0.12em] text-[#111]">Book consultation <ArrowRight size={15} /></a>
+            </div>
+          </>
         )}
       </header>
 

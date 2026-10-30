@@ -171,6 +171,76 @@
   letter-spacing: 0.12em;
 }
 
+.site-nav-desktop {
+  display: none;
+  align-items: center;
+}
+
+.site-nav-desktop--home {
+  gap: 1.8rem;
+}
+
+.site-nav-desktop--services {
+  gap: 1.575rem;
+}
+
+.site-nav-desktop--home a {
+  font-size: 0.6975rem;
+}
+
+.site-nav-desktop--services a {
+  font-size: 0.6138rem;
+}
+
+.site-nav-desktop--services a {
+  position: relative;
+  padding-block: 0.5rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 200ms ease;
+}
+
+.site-nav-desktop--services a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--gold);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease;
+}
+
+.site-nav-desktop--services a:hover,
+.site-nav-desktop--services a[aria-current="page"] {
+  color: var(--gold);
+}
+
+.site-nav-desktop--services a:hover::after,
+.site-nav-desktop--services a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.site-nav-mobile--home a {
+  padding-block: 0.9rem;
+  font-size: 1.395rem;
+}
+
+.site-nav-mobile--services .services-mobile-link {
+  padding-block: 0.81rem;
+  font-size: 0.6696rem;
+}
+
+@media (min-width: 64rem) {
+  .site-nav-desktop {
+    display: flex;
+  }
+}
+
 .site-header nav a::after {
   position: absolute;
   right: 0;
@@ -190,19 +260,7 @@
 
 .home-hero {
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 10% 10%, rgba(190, 146, 71, 0.13), transparent 42%),
-    linear-gradient(135deg, #17130f 0%, #0f0e0b 58%, #19140e 100%);
-}
-
-.home-hero::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image: linear-gradient(rgba(222, 190, 128, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(222, 190, 128, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  content: "";
-  mask-image: linear-gradient(90deg, black, transparent 68%);
+  background-color: #0f0e0b;
 }
 
 .home-hero-copy {
@@ -354,40 +412,6 @@
 
 .services-header {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
-}
-
-.services-nav-link {
-  position: relative;
-  padding-block: 0.5rem;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: color 200ms ease;
-}
-
-.services-nav-link::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: var(--gold);
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 250ms ease;
-}
-
-.services-nav-link:hover,
-.services-nav-active {
-  color: var(--gold);
-}
-
-.services-nav-link:hover::after,
-.services-nav-active::after {
-  transform: scaleX(1);
 }
 
 .services-mobile-link {
