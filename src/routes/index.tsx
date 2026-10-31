@@ -491,12 +491,40 @@ function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [conciergeOpen, setConciergeOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   function openBooking(treatment = "") {
     setSelectedTreatment(treatment);
     setConciergeOpen(false);
     setBookingOpen(true);
   }
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    const startVideo = () => {
+      const playRequest = video.play();
+      if (playRequest) {
+        playRequest.catch((error: unknown) => {
+          console.warn("Hero video autoplay was blocked by the browser.", error);
+        });
+      }
+    };
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") startVideo();
+    };
+
+    startVideo();
+    video.addEventListener("canplay", startVideo);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      video.removeEventListener("canplay", startVideo);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <main id="top" className="overflow-x-clip bg-background text-foreground">
@@ -514,13 +542,17 @@ function Index() {
 
       <section className="home-hero relative min-h-[calc(100svh-5rem)] overflow-hidden border-b border-border lg:min-h-[calc(100vh-5rem)]">
         <video
+          ref={heroVideoRef}
           aria-hidden="true"
           autoPlay
+          controls={false}
+          defaultMuted
+          disablePictureInPicture
           loop
           muted
           playsInline
-          preload="metadata"
-          className="absolute inset-0 size-full object-cover"
+          preload="auto"
+          className="pointer-events-none absolute inset-0 size-full object-cover"
         >
           <source
             src="https://videos.pexels.com/video-files/7423541/7423541-sd_960_540_30fps.mp4"
