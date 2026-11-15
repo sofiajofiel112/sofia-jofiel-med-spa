@@ -3,7 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { storeVerifiedTransaction } from "@/lib/flutterwave-store";
 import {
   getFlutterwaveSignatureHeader,
+  isPristinumDynPaymentReference,
   isSuccessfulFlutterwaveStatus,
+  verifyFlutterwaveTransaction,
   verifyFlutterwaveWebhookSignature,
 } from "@/lib/flutterwave";
 
@@ -18,7 +20,7 @@ export const Route = createFileRoute("/api/flutterwave/webhook")({
           return new Response("Missing Flutterwave signature header.", { status: 401 });
         }
 
-        if (!verifyFlutterwaveWebhookSignature(rawBody, signature)) {
+        if (!verifyFlutterwaveWebhookSignature(signature)) {
           return new Response("Invalid Flutterwave signature.", { status: 401 });
         }
 
@@ -31,33 +33,51 @@ export const Route = createFileRoute("/api/flutterwave/webhook")({
         }
 
         const event = typeof payload.event === "string" ? payload.event : "";
-        const data = payload.data && typeof payload.data === "object" ? (payload.data as Record<string, unknown>) : {};
+        const data =
+          payload.data && typeof payload.data === "object"
+            ? (payload.data as Record<string, unknown>)
+            : {};
         const txRef =
           typeof data.tx_ref === "string"
             ? data.tx_ref
             : typeof data.txRef === "string"
               ? data.txRef
-              : typeof data.transaction === "object" && data.transaction && "tx_ref" in data.transaction
+              : typeof data.transaction === "object" &&
+                  data.transaction &&
+                  "tx_ref" in data.transaction
                 ? String((data.transaction as { tx_ref?: string }).tx_ref ?? "")
                 : "";
         const status = typeof data.status === "string" ? data.status : "unknown";
 
-        if (txRef && isSuccessfulFlutterwaveStatus(status)) {
-          storeVerifiedTransaction({
-            tx_ref: txRef,
-            status,
-            amount: typeof data.amount === "number" ? data.amount : undefined,
-            currency: typeof data.currency === "string" ? data.currency : undefined,
-            id: typeof data.id === "number" ? data.id : undefined,
-            customer:
-              data.customer && typeof data.customer === "object"
-                ? (data.customer as {
-                    email?: string;
-                    phone_number?: string;
-                    name?: string;
-                  })
-                : undefined,
-          });
+        if (
+          event === "charge.completed" &&
+          isPristinumDynPaymentReference(txRef) &&
+          isSuccessfulFlutterwaveStatus(status)
+        ) {
+          try {
+            const verification = await verifyFlutterwaveTransaction(txRef);
+            if (!isSuccessfulFlutterwaveStatus(verification.status)) {
+              return Response.json(
+                { ok: false, error: "Flutterwave has not confirmed this payment yet." },
+                { status: 502 },
+              );
+            }
+
+            storeVerifiedTransaction({
+              tx_ref: verification.tx_ref,
+              status: verification.status,
+              amount: verification.amount,
+              currency: verification.currency,
+              id: verification.id,
+              customer: verification.customer,
+            });
+          } catch (error) {
+            console.error("Could not verify Pristinum Dyn webhook payment.", error);
+            return Response.json(
+              { ok: false, error: "Flutterwave payment verification is temporarily unavailable." },
+              { status: 502 },
+            );
+          }
         }
 
         return Response.json({

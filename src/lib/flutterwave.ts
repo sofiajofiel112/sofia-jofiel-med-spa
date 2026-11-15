@@ -1,4 +1,4 @@
-import crypto from "node:crypto";
+import { timingSafeEqual } from "node:crypto";
 
 const FLUTTERWAVE_BASE_URL = "https://api.flutterwave.com/v3";
 
@@ -12,6 +12,23 @@ function getFlutterwaveWebhookSecret() {
 
 export function isSuccessfulFlutterwaveStatus(status: string) {
   return ["successful", "completed", "succeeded"].includes(status.toLowerCase());
+}
+
+export function isFlutterwaveWebhookHashValid(
+  configuredHash: string,
+  receivedHash: string | undefined,
+) {
+  if (!configuredHash || !receivedHash) {
+    return false;
+  }
+
+  const expected = Buffer.from(configuredHash);
+  const received = Buffer.from(receivedHash);
+  return expected.length === received.length && timingSafeEqual(expected, received);
+}
+
+export function isPristinumDynPaymentReference(reference: unknown): reference is string {
+  return typeof reference === "string" && reference.startsWith("PRISTINUM-");
 }
 
 export function getFlutterwaveSignatureHeader(headers: Headers): string {
@@ -61,9 +78,16 @@ export async function verifyFlutterwaveTransaction(txRef: string) {
     throw new Error(payload.message || "Flutterwave verification failed.");
   }
 
+  const verifiedTxRef = payload.data?.tx_ref;
+  if (!verifiedTxRef || verifiedTxRef !== txRef) {
+    throw new Error(
+      "Flutterwave verification returned a different or missing transaction reference.",
+    );
+  }
+
   return {
     status: payload.data?.status || payload.status || "pending",
-    tx_ref: payload.data?.tx_ref || txRef,
+    tx_ref: verifiedTxRef,
     amount: payload.data?.amount,
     currency: payload.data?.currency,
     id: payload.data?.id,
@@ -72,19 +96,6 @@ export async function verifyFlutterwaveTransaction(txRef: string) {
   };
 }
 
-export function verifyFlutterwaveWebhookSignature(rawBody: string, signature: string) {
-  const secretKey = getFlutterwaveWebhookSecret();
-  if (!secretKey || !signature) {
-    return false;
-  }
-
-  const computed = crypto.createHmac("sha256", secretKey).update(rawBody).digest("hex");
-  const expected = Buffer.from(signature, "utf8");
-  const actual = Buffer.from(computed, "utf8");
-
-  if (expected.length !== actual.length) {
-    return false;
-  }
-
-  return crypto.timingSafeEqual(expected, actual);
+export function verifyFlutterwaveWebhookSignature(signature: string) {
+  return isFlutterwaveWebhookHashValid(getFlutterwaveWebhookSecret(), signature);
 }
