@@ -76,7 +76,7 @@ const treatments = [
 ];
 
 const pricingCatalog = [
-  { category: "Consultation", service: "Consultation", amount: 30000 },
+  { category: "Consultation", service: "Consultation", amount: 100 },
   { category: "Facial Treatment", service: "Deep Cleansing Facial", amount: 60000 },
   { category: "Facial Treatment", service: "Anti-Acne Facial", amount: 60000 },
   { category: "Facial Treatment", service: "HydraFacial", amount: 65000 },
