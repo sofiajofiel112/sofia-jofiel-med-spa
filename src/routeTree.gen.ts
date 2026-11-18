@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookingSuccessRouteImport } from './routes/booking-success'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ApiFlutterwaveCompleteRouteImport } from './routes/api/flutterwave/complete'
 import { Route as ApiFlutterwaveVerifyRouteImport } from './routes/api/flutterwave/verify'
 import { Route as ApiFlutterwaveWebhookRouteImport } from './routes/api/flutterwave/webhook'
 
@@ -30,6 +31,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFlutterwaveCompleteRoute = ApiFlutterwaveCompleteRouteImport.update({
+  id: '/api/flutterwave/complete',
+  path: '/api/flutterwave/complete',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiFlutterwaveVerifyRoute = ApiFlutterwaveVerifyRouteImport.update({
   id: '/api/flutterwave/verify',
   path: '/api/flutterwave/verify',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/complete': typeof ApiFlutterwaveCompleteRoute
   '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
   '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/complete': typeof ApiFlutterwaveCompleteRoute
   '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
   '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
@@ -60,6 +68,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/services': typeof ServicesRoute
+  '/api/flutterwave/complete': typeof ApiFlutterwaveCompleteRoute
   '/api/flutterwave/verify': typeof ApiFlutterwaveVerifyRoute
   '/api/flutterwave/webhook': typeof ApiFlutterwaveWebhookRoute
 }
@@ -69,6 +78,7 @@ export interface FileRouteTypes {
     | '/'
     | '/booking-success'
     | '/services'
+    | '/api/flutterwave/complete'
     | '/api/flutterwave/verify'
     | '/api/flutterwave/webhook'
   fileRoutesByTo: FileRoutesByTo
@@ -76,6 +86,7 @@ export interface FileRouteTypes {
     | '/'
     | '/booking-success'
     | '/services'
+    | '/api/flutterwave/complete'
     | '/api/flutterwave/verify'
     | '/api/flutterwave/webhook'
   id:
@@ -83,6 +94,7 @@ export interface FileRouteTypes {
     | '/'
     | '/booking-success'
     | '/services'
+    | '/api/flutterwave/complete'
     | '/api/flutterwave/verify'
     | '/api/flutterwave/webhook'
   fileRoutesById: FileRoutesById
@@ -91,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingSuccessRoute: typeof BookingSuccessRoute
   ServicesRoute: typeof ServicesRoute
+  ApiFlutterwaveCompleteRoute: typeof ApiFlutterwaveCompleteRoute
   ApiFlutterwaveVerifyRoute: typeof ApiFlutterwaveVerifyRoute
   ApiFlutterwaveWebhookRoute: typeof ApiFlutterwaveWebhookRoute
 }
@@ -118,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/flutterwave/complete': {
+      id: '/api/flutterwave/complete'
+      path: '/api/flutterwave/complete'
+      fullPath: '/api/flutterwave/complete'
+      preLoaderRoute: typeof ApiFlutterwaveCompleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/flutterwave/verify': {
       id: '/api/flutterwave/verify'
       path: '/api/flutterwave/verify'
@@ -139,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingSuccessRoute: BookingSuccessRoute,
   ServicesRoute: ServicesRoute,
+  ApiFlutterwaveCompleteRoute: ApiFlutterwaveCompleteRoute,
   ApiFlutterwaveVerifyRoute: ApiFlutterwaveVerifyRoute,
   ApiFlutterwaveWebhookRoute: ApiFlutterwaveWebhookRoute,
 }

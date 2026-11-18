@@ -46,3 +46,7 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+### Booking email notifications
+
+After Flutterwave verifies a consultation payment, the server sends the booking details to `info@sofiajofielmedspa.com` using Resend. Configure `RESEND_API_KEY` and `RESEND_FROM_EMAIL` as server-side environment variables in Vercel (Production and Preview as needed). The sender address must belong to a domain verified in Resend. Never expose the Resend API key through a `VITE_` variable or commit it to the repository.

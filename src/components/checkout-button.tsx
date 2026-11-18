@@ -52,38 +52,24 @@ export default function PristinumDynCheckout({
     }
 
     onPaymentStart(txRef);
+    let navigatedToStatusPage = false;
+    const openStatusPage = (status: string, reference: string) => {
+      if (navigatedToStatusPage) return;
+      navigatedToStatusPage = true;
+      window.location.assign(
+        `/booking-success?status=${encodeURIComponent(status)}&tx_ref=${encodeURIComponent(reference)}`,
+      );
+    };
+
     handleFlutterwavePayment({
-      callback: async (response) => {
+      callback: (response) => {
         closePaymentModal();
         const status = response.status || "failed";
         const reference = response.tx_ref || txRef;
-
-        try {
-          const verificationResponse = await fetch(
-            `/api/flutterwave/verify?tx_ref=${encodeURIComponent(reference)}`,
-            { method: "GET" },
-          );
-          const verification = await verificationResponse.json();
-
-          if (!verificationResponse.ok || verification.verified === false) {
-            window.location.assign(
-              `/booking-success?status=${encodeURIComponent(status)}&tx_ref=${encodeURIComponent(reference)}`,
-            );
-            return;
-          }
-
-          window.location.assign(
-            `/booking-success?status=${encodeURIComponent(verification.status || status)}&tx_ref=${encodeURIComponent(reference)}`,
-          );
-        } catch (error) {
-          console.error("Flutterwave server verification failed.", error);
-          window.location.assign(
-            `/booking-success?status=${encodeURIComponent(status)}&tx_ref=${encodeURIComponent(reference)}`,
-          );
-        }
+        openStatusPage(status, reference);
       },
       onClose: () => {
-        console.info("Flutterwave checkout closed without completing payment.");
+        openStatusPage("pending", txRef);
       },
     });
   }

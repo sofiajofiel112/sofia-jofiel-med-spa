@@ -76,7 +76,7 @@ const treatments = [
 ];
 
 const pricingCatalog = [
-  { category: "Consultation", service: "Consultation", amount: 150 },
+  { category: "Consultation", service: "Consultation", amount: 30000 },
   { category: "Facial Treatment", service: "Deep Cleansing Facial", amount: 60000 },
   { category: "Facial Treatment", service: "Anti-Acne Facial", amount: 60000 },
   { category: "Facial Treatment", service: "HydraFacial", amount: 65000 },
@@ -324,7 +324,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
     const suggestions = getServiceSuggestions(payload.treatment);
     const fallback = suggestions[0] ?? { category: "Consultation", service: "Consultation", amount: 30000 };
 
-    sessionStorage.setItem("pendingConsultation", JSON.stringify({ ...payload, service: fallback.service, price: formatPrice(fallback.amount) }));
+    sessionStorage.setItem("pendingConsultation", JSON.stringify({ ...payload, service: fallback.service, amount: fallback.amount, price: formatPrice(fallback.amount) }));
     setSelectedService(fallback);
     setStep("service");
   }
@@ -362,7 +362,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                     setSelectedService(option);
                     const stored = sessionStorage.getItem("pendingConsultation");
                     const payload = stored ? JSON.parse(stored) : { name: "", phone: "", email: "", treatment: treatment || "Consultation", date: preferredDate || "", time: preferredTime || "" };
-                    sessionStorage.setItem("pendingConsultation", JSON.stringify({ ...payload, service: option.service, price: formatPrice(option.amount) }));
+                    sessionStorage.setItem("pendingConsultation", JSON.stringify({ ...payload, service: option.service, amount: option.amount, price: formatPrice(option.amount) }));
                   }}
                   className={`flex w-full items-center justify-between rounded-none border p-4 text-left transition ${selectedService?.service === option.service ? "border-gold bg-gold/10" : "border-border bg-background hover:border-gold/50"}`}
                 >
@@ -391,6 +391,7 @@ function BookingDialog({ open, onOpenChange, defaultTreatment = "" }: { open: bo
                       JSON.stringify({
                         ...payload,
                         service: selectedService.service,
+                        amount: selectedService.amount,
                         price: formatPrice(selectedService.amount),
                         tx_ref: txRef,
                       }),
@@ -546,7 +547,6 @@ function Index() {
           aria-hidden="true"
           autoPlay
           controls={false}
-          defaultMuted
           disablePictureInPicture
           loop
           muted
